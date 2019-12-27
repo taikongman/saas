@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.crm.CardCategoryDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.crm.CardCategory" >
+    <id column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="admin_id" property="adminId" jdbcType="BIGINT" />
+    <result column="card_type" property="cardType" jdbcType="INTEGER" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="INTEGER" />
+    <result column="category_level" property="categoryLevel" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="lan_type" property="lanType" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="SelectResultMap" type="com.saas.api.admin.res.select.crm.CardCategorySelect" >
+    <id column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="category_name" property="categoryName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Select_Column_List" >
+    category_id, category_name 
+  </sql>
+  <sql id="Base_Column_List" >
+    category_id, group_id, company_id, department_id, admin_id, card_type, category_name, parent_id, category_level, remark, status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_card_category
+    where category_id = #{categoryId,jdbcType=INTEGER} 
+  </select>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_card_category 
+    <where> category_name = #{categoryName,jdbcType=INTEGER} 
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from saas_crm_card_category
+    where category_id = #{categoryId,jdbcType=INTEGER} 
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="categoryId" parameterType="com.saas.api.common.entity.crm.CardCategory" >
+    insert into saas_crm_card_category (group_id, company_id, department_id, admin_id, 
+    card_type, category_name, parent_id, category_level, 
+    remark, status, create_time, lan_type)
+    values (#{groupId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, #{adminId,jdbcType=BIGINT}, 
+      #{cardType,jdbcType=INTEGER}, #{categoryName,jdbcType=VARCHAR}, #{parentId,jdbcType=INTEGER}, #{categoryLevel,jdbcType=INTEGER}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{lanType,jdbcType=VARCHAR} 
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.CardCategory" >
+    insert into saas_crm_card_category
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="cardType != null" >
+        card_type,
+      </if>
+      <if test="categoryName != null and '' != categoryName" >
+        category_name,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="categoryLevel != null" >
+        category_level,
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        lan_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="cardType != null" >
+        #{cardType,jdbcType=INTEGER},
+      </if>
+      <if test="categoryName != null and '' != categoryName" >
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryLevel != null" >
+        #{categoryLevel,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null and '' != remark" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        #{lanType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.api.common.entity.crm.CardCategory" >
+    update saas_crm_card_category
+    <set >
+      <if test="categoryName != null and '' != categoryName" >
+        category_name = #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="cardType != null" >
+        card_type = #{cardType,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryLevel != null" >
+        category_level = #{categoryLevel,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where category_id = #{categoryId,jdbcType=INTEGER} 
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.api.common.entity.crm.CardCategory" >
+    update saas_crm_card_category
+    set category_name = #{categoryName,jdbcType=VARCHAR},
+      card_type = #{cardType,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=INTEGER},
+      category_level = #{categoryLevel,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP} 
+    where category_id = #{categoryId,jdbcType=INTEGER} 
+  </update>
+  <select id="listData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from saas_crm_card_category
+    <where> 1 = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="cardType != null" >
+        and card_type = #{cardType,jdbcType=INTEGER} 
+      </if>
+      <if test="categoryId != null" >
+        and category_id = #{categoryId,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+    ORDER BY category_id asc
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_crm_card_category
+    <where> 1 = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="cardType != null" >
+        and card_type = #{cardType,jdbcType=INTEGER} 
+      </if>
+      <if test="categoryId != null" >
+        and category_id = #{categoryId,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findByObject" resultMap="BaseResultMap" parameterType="com.saas.api.common.entity.crm.CardCategory" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_card_category
+    <where> 1 = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="cardType != null" >
+        and card_type = #{cardType,jdbcType=INTEGER} 
+      </if>
+      <if test="categoryId != null" >
+        and category_id = #{categoryId,jdbcType=INTEGER} 
+      </if>
+      <if test="categoryName != null and '' != categoryName" >
+        and category_name = #{categoryName,jdbcType=VARCHAR} 
+      </if>
+      <if test="parentId != null" >
+        and parent_id = #{parentId,jdbcType=INTEGER} 
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findSelectObject" resultMap="SelectResultMap" parameterType="com.saas.api.common.entity.crm.CardCategory" >
+    select 
+    <include refid="Select_Column_List" />
+    from saas_crm_card_category
+    <where> 1 = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="cardType != null" >
+        and card_type = #{cardType,jdbcType=INTEGER} 
+      </if>
+      <if test="categoryId != null" >
+        and category_id = #{categoryId,jdbcType=INTEGER} 
+      </if>
+      <if test="categoryName != null and '' != categoryName" >
+        and category_name = #{categoryName,jdbcType=VARCHAR} 
+      </if>
+      <if test="parentId != null" >
+        and parent_id = #{parentId,jdbcType=INTEGER} 
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+</mapper>

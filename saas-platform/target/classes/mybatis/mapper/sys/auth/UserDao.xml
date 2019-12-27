@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.sys.auth.UserDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.sys.auth.User" >
+    <id column="admin_id" property="adminId" jdbcType="BIGINT" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="work_no" property="workNo" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="email" property="email" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="position" property="position" jdbcType="INTEGER" />
+    <result column="wechat_openid" property="wechatOpenid" jdbcType="VARCHAR" />
+    <result column="wechat_nickname" property="wechat_Nickname" jdbcType="VARCHAR" />
+    <result column="last_login_ip" property="lastLoginIp" jdbcType="VARCHAR" />
+    <result column="last_login_time" property="lastLoginTime" jdbcType="TIMESTAMP" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="lan_type" property="lanType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    admin_id, group_id, group_name, company_id, company_name, department_id, department_name, user_name, password, 
+    nick_name, real_name, work_no, phone, email, avatar, sex, status, position, wechat_openid, wechat_nickname, 
+    last_login_ip, last_login_time, create_time, update_time
+  </sql>
+  <select id="listData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from saas_sys_auth_user
+    <where> admin_id >= 600
+      <if test="groupId != null" >
+        and group_id = #{groupId,jdbcType=INTEGER} 
+      </if>
+      <if test="companyId != null" >
+        and company_id = #{companyId,jdbcType=INTEGER} 
+      </if>
+      <if test="departmentId != null" >
+        and department_id = #{departmentId,jdbcType=INTEGER} 
+      </if>
+      <if test="adminId != null" >
+        and admin_id = #{adminId,jdbcType=BIGINT} 
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+    ORDER BY create_time desc
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_sys_auth_user
+    <where> admin_id >= 600
+      <if test="groupId != null" >
+        and group_id = #{groupId,jdbcType=INTEGER} 
+      </if>
+      <if test="companyId != null" >
+        and company_id = #{companyId,jdbcType=INTEGER} 
+      </if>
+      <if test="departmentId != null" >
+        and department_id = #{departmentId,jdbcType=INTEGER} 
+      </if>
+      <if test="adminId != null" >
+        and admin_id = #{adminId,jdbcType=BIGINT} 
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+    <select id="findByObject" resultMap="BaseResultMap" parameterType="com.saas.api.common.entity.sys.auth.User" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_sys_auth_user
+    <where> admin_id >= 600
+      <if test="groupId != null" >
+        and group_id = #{groupId,jdbcType=INTEGER} 
+      </if>
+      <if test="companyId != null" >
+        and company_id = #{companyId,jdbcType=INTEGER} 
+      </if>
+      <if test="departmentId != null" >
+        and department_id = #{departmentId,jdbcType=INTEGER} 
+      </if>
+      <if test="adminId != null" >
+        and admin_id = #{adminId,jdbcType=BIGINT} 
+      </if>
+      <if test="userName != null" >
+        and user_name = #{userName,jdbcType=VARCHAR} 
+      </if>
+      <if test="nickName != null" >
+        and nick_name = #{nickName,jdbcType=VARCHAR} 
+      </if>
+      <if test="phone != null" >
+        and phone = #{phone,jdbcType=VARCHAR} 
+      </if>
+      <if test="workNo != null" >
+        and work_no = #{workNo,jdbcType=VARCHAR} 
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=INTEGER} 
+      </if>
+    </where>
+  </select>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_sys_auth_user
+    where admin_id = #{adminId,jdbcType=BIGINT} 
+  </select>
+  <select id="findByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_sys_auth_user
+    where user_name = #{userName,jdbcType=VARCHAR} 
+  </select>
+  <insert id="insertData" useGeneratedKeys="true" keyProperty="adminId" parameterType="com.saas.api.common.entity.sys.auth.User" >
+    insert into saas_sys_auth_user (group_id, group_name, company_id, company_name, department_id, department_name, 
+    user_name, password, nick_name, real_name, work_no, phone, email, avatar, sex, status, position, wechat_openid, 
+    wechat_nickname, last_login_ip, last_login_time, create_time, lan_type)
+    values (#{groupId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR},#{companyId,jdbcType=INTEGER}, #{companyName,jdbcType=VARCHAR},
+    #{departmentId,jdbcType=INTEGER}, #{departmentName,jdbcType=VARCHAR},#{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    #{nickName,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR},#{workNo,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+    #{email,jdbcType=INTEGER}, #{avatar,jdbcType=VARCHAR},#{sex,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+    #{position,jdbcType=INTEGER}, #{wechatOpenid,jdbcType=VARCHAR}, #{wechatNickname,jdbcType=VARCHAR}, #{lastLoginIp,jdbcType=VARCHAR},
+    #{lastLoginTime,jdbcType=TIMESTAMP}, #{createTime,jdbcType=TIMESTAMP}, #{lanType,jdbcType=VARCHAR} 
+    )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="adminId" parameterType="com.saas.api.common.entity.sys.auth.User" >
+    insert into saas_sys_auth_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+       <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="groupName != null" >
+        group_name,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="departmentName != null" >
+        department_name,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="workNo != null" >
+        work_no,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="position != null" >
+        position,
+      </if>
+      <if test="wechatOpenid != null" >
+        wechat_openid,
+      </if>
+      <if test="wechatNickname != null" >
+        wechat_nickname,
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip,
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lanType != null" >
+        lan_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentName != null" >
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="workNo != null" >
+        #{workNo,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+       <if test="position != null" >
+        #{position,jdbcType=INTEGER},
+      </if>
+      <if test="wechatOpenid != null" >
+        #{wechatOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatNickname != null" >
+        #{wechatNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginIp != null" >
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lanType != null" >
+        #{lanType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="resetPassword" parameterType="com.saas.api.common.entity.sys.auth.User" >
+    update saas_sys_auth_user
+    <set >
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where admin_id = #{adminId,jdbcType=BIGINT} 
+  </update>
+  <update id="updateData" parameterType="com.saas.api.common.entity.sys.auth.User" >
+    update saas_sys_auth_user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="workNo != null" >
+        work_no = #{workNo,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+       <if test="position != null" >
+        position = #{position,jdbcType=INTEGER},
+      </if>
+      <if test="wechatOpenid != null" >
+        wechat_openid = #{wechatOpenid,jdbcType=VARCHAR},
+      </if>
+      <if test="wechatNickname != null" >
+        wechat_nickname = #{wechatNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginIp != null" >
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null" >
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where admin_id = #{adminId,jdbcType=BIGINT} 
+  </update>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from saas_sys_auth_user
+    where admin_id = #{adminId,jdbcType=BIGINT} 
+  </delete>
+</mapper>

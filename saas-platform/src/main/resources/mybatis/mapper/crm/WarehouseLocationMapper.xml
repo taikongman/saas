@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.crm.WarehouseLocationDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.crm.WarehouseLocation" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="warehouse_id" property="warehouseId" jdbcType="INTEGER" />
+    <result column="location_code" property="locationCode" jdbcType="VARCHAR" />
+    <result column="location_name" property="locationName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, warehouse_id, location_code, location_name, remark, status, create_time, update_time 
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select
+    <include refid="Base_Column_List" />
+    from saas_crm_warehouse_location
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="findByName" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from saas_crm_warehouse_location
+    where warehouse_id = #{warehouseId,jdbcType=INTEGER} and location_name = #{locationName,jdbcType=VARCHAR} 
+  </select>
+  <select id="findByWarehouseId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from saas_crm_warehouse_location
+    where warehouse_id = #{warehouseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from saas_crm_warehouse_location
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByWarehouseId" parameterType="java.lang.Integer" >
+    delete from saas_crm_warehouse_location
+    where warehouse_id = #{warehouseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.WarehouseLocation" >
+    insert into saas_crm_warehouse_location (warehouse_id, location_code, location_name, remark, status, create_time)
+    values (#{warehouseId,jdbcType=INTEGER},  
+      #{locationCode,jdbcType=VARCHAR}, #{locationName,jdbcType=VARCHAR},  
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP} 
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.WarehouseLocation" >
+    insert into saas_crm_warehouse_location
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="warehouseId != null" >
+        warehouse_id,
+      </if>
+      <if test="locationCode != null and '' != locationCode" >
+        location_code,
+      </if>
+      <if test="locationName != null and '' != locationName" >
+        location_name,
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="warehouseId != null" >
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="locationCode != null and '' != locationCode" >
+        #{locationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="locationName != null and '' != locationName" >
+        #{locationName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.api.common.entity.crm.WarehouseLocation" >
+    update saas_crm_warehouse_location
+    <set >
+      <if test="locationCode != null and '' != locationCode" >
+        location_code = #{locationCode,jdbcType=VARCHAR},
+      </if>
+      <if test="locationName != null and '' != locationName" >
+        location_name = #{locationName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT} 
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.api.common.entity.crm.WarehouseLocation" >
+    update saas_crm_warehouse_location
+    set location_code = #{locationCode,jdbcType=VARCHAR},
+      location_name = #{locationName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT} 
+  </update>
+  <select id="listData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_warehouse_location
+    <where> 1=1 
+      <if test="warehouseId != null">
+        and warehouse_id = #{warehouseId,jdbcType=INTEGER}
+      </if>
+      <if test="locationCode != null and '' != locationCode" >
+        and location_code = #{locationCode,jdbcType=VARCHAR} 
+      </if>
+      <if test="locationName != null and '' != locationName" >
+        and location_name = #{locationName,jdbcType=VARCHAR} 
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_crm_warehouse_location
+    <where> 1=1 
+     <if test="warehouseId != null">
+        and warehouse_id = #{warehouseId,jdbcType=INTEGER}
+      </if>
+      <if test="locationCode != null and '' != locationCode" >
+        and location_code = #{locationCode,jdbcType=VARCHAR} 
+      </if>
+      <if test="locationName != null and '' != locationName" >
+        and location_name = #{locationName,jdbcType=VARCHAR} 
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <select id="findByObject" parameterType="com.saas.api.common.entity.crm.WarehouseLocation" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_warehouse_location
+    <where> 1=1 
+      <if test="warehouseId != null">
+        and warehouse_id = #{warehouseId,jdbcType=INTEGER}
+      </if>
+      <if test="locationCode != null and '' != locationCode" >
+        and location_code = #{locationCode,jdbcType=VARCHAR} 
+      </if>
+      <if test="locationName != null and '' != locationName" >
+        and location_name = #{locationName,jdbcType=VARCHAR} 
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+</mapper>

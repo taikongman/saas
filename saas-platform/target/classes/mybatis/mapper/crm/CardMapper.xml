@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.crm.CardDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.crm.Card" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="admin_id" property="adminId" jdbcType="BIGINT" />
+    <result column="category_id" property="categoryId" jdbcType="INTEGER" />
+    <result column="card_name" property="cardName" jdbcType="VARCHAR" />
+    <result column="project_discount" property="projectDiscount" jdbcType="INTEGER" />
+    <result column="project_up_limit" property="projectUpLimit" jdbcType="INTEGER" />
+    <result column="commodity_discount" property="commodityDiscount" jdbcType="INTEGER" />
+    <result column="commodity_up_limit" property="commodityUpLimit" jdbcType="INTEGER" />
+    <result column="low_limit" property="lowLimit" jdbcType="INTEGER" />
+    <result column="effective_date" property="effectiveDate" jdbcType="TIMESTAMP" />
+    <result column="expiry_date" property="expiryDate" jdbcType="TIMESTAMP" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="sale_price" property="salePrice" jdbcType="DECIMAL" />
+    <result column="rights" property="rights" jdbcType="VARCHAR" />
+    <result column="usages" property="usages" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="lan_type" property="lanType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, group_id, company_id, department_id, admin_id, category_id, card_name, 
+    project_discount, project_up_limit, commodity_discount, commodity_up_limit, low_limit, 
+    effective_date, expiry_date, price, discount, amount, sale_price, rights, usages, 
+    remark, status, create_time, update_time
+  </sql>
+  <resultMap id="SelectResultMap" type="com.saas.api.admin.res.select.crm.CardSelect" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="card_name" property="cardName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Select_Column_List" >
+    id, card_name 
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_card
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from saas_crm_card
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.Card" >
+    insert into saas_crm_card (group_id, company_id, department_id, admin_id, category_id, card_name, 
+    project_discount, project_up_limit, commodity_discount, commodity_up_limit, low_limit, 
+    effective_date, expiry_date, price, discount, amount, sale_price, rights, usages, 
+    remark, status, create_time, update_time, lan_type)
+    values (#{groupId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, #{adminId,jdbcType=BIGINT}, 
+      #{categoryId,jdbcType=INTEGER}, #{cardName,jdbcType=VARCHAR}, 
+      #{projectDiscount,jdbcType=INTEGER}, #{projectUpLimit,jdbcType=INTEGER}, #{commodityDiscount,jdbcType=INTEGER}, 
+      #{commodityUpLimit,jdbcType=INTEGER}, #{lowLimit,jdbcType=INTEGER}, 
+      #{effectiveDate,jdbcType=TIMESTAMP}, #{expiryDate,jdbcType=TIMESTAMP}, 
+      #{price,jdbcType=DECIMAL}, #{discount,jdbcType=DECIMAL}, #{amount,jdbcType=DECIMAL}, #{salePrice,jdbcType=DECIMAL}, 
+      #{rights,jdbcType=VARCHAR}, #{usages,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{lanType,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.Card" >
+    insert into saas_crm_card
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="categoryId != null" >
+        category_id,
+      </if>
+      <if test="cardName != null and '' != cardName" >
+        card_name,
+      </if>
+      <if test="projectDiscount != null" >
+        project_discount,
+      </if>
+      <if test="projectUpLimit != null" >
+        project_up_limit,
+      </if>
+      <if test="commodityDiscount != null" >
+        commodity_discount,
+      </if>
+      <if test="commodityUpLimit != null" >
+        commodity_up_limit,
+      </if>
+      <if test="lowLimit != null" >
+        low_limit,
+      </if>
+      <if test="effectiveDate != null" >
+        effective_date,
+      </if>
+      <if test="expiryDate != null" >
+        expiry_date,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="salePrice != null" >
+        sale_price,
+      </if>
+      <if test="rights != null and '' != rights" >
+        rights,
+      </if>
+      <if test="usages != null and '' != usages" >
+        usages,
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        lan_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="categoryId != null" >
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="cardName != null and '' != cardName" >
+        #{cardName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDiscount != null" >
+        #{projectDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="projectUpLimit != null" >
+        #{projectUpLimit,jdbcType=INTEGER},
+      </if>
+      <if test="commodityDiscount != null" >
+        #{commodityDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="commodityUpLimit != null" >
+        #{commodityUpLimit,jdbcType=INTEGER},
+      </if>
+      <if test="lowLimit != null" >
+        #{lowLimit,jdbcType=INTEGER},
+      </if>
+      <if test="effectiveDate != null" >
+        #{effectiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expiryDate != null" >
+        #{expiryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="salePrice != null" >
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="rights != null and '' != rights" >
+        #{rights,jdbcType=VARCHAR},
+      </if>
+      <if test="usages != null and '' != usages" >
+        #{usages,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        #{lanType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.api.common.entity.crm.Card" >
+    update saas_crm_card
+    <set >
+      <if test="categoryId != null" >
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="cardName != null and '' != cardName" >
+        card_name = #{cardName,jdbcType=VARCHAR},
+      </if>
+      <if test="projectDiscount != null" >
+        project_discount = #{projectDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="projectUpLimit != null" >
+        project_up_limit = #{projectUpLimit,jdbcType=INTEGER},
+      </if>
+      <if test="commodityDiscount != null" >
+        commodity_discount = #{commodityDiscount,jdbcType=INTEGER},
+      </if>
+      <if test="commodityUpLimit != null" >
+        commodity_up_limit = #{commodityUpLimit,jdbcType=INTEGER},
+      </if>
+      <if test="lowLimit != null" >
+        low_limit = #{lowLimit,jdbcType=INTEGER},
+      </if>
+      <if test="effectiveDate != null" >
+        effective_date = #{effectiveDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="expiryDate != null" >
+        expiry_date = #{expiryDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="salePrice != null" >
+        sale_price = #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="rights != null and '' != rights" >
+        rights = #{rights,jdbcType=VARCHAR},
+      </if>
+      <if test="usages != null and '' != usages" >
+        usages = #{usages,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.api.common.entity.crm.Card" >
+    update saas_crm_card
+    set category_id = #{categoryId,jdbcType=INTEGER},
+      card_name = #{cardName,jdbcType=VARCHAR},
+      project_discount = #{projectDiscount,jdbcType=INTEGER},
+      project_up_limit = #{projectUpLimit,jdbcType=INTEGER},
+      commodity_discount = #{commodityDiscount,jdbcType=INTEGER},
+      commodity_up_limit = #{commodityUpLimit,jdbcType=INTEGER},
+      low_limit = #{lowLimit,jdbcType=INTEGER},
+      effective_date = #{effectiveDate,jdbcType=TIMESTAMP},
+      expiry_date = #{expiryDate,jdbcType=TIMESTAMP},
+      price = #{price,jdbcType=DECIMAL},
+      discount = #{discount,jdbcType=DECIMAL},
+      amount = #{amount,jdbcType=DECIMAL},
+      sale_price = #{salePrice,jdbcType=DECIMAL},
+      rights = #{rights,jdbcType=VARCHAR},
+      usages = #{usages,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByName" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_card 
+    <where> card_name = #{cardName,jdbcType=VARCHAR} 
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="listData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from saas_crm_card
+    <where> 1 = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="categoryId != null" >
+        and category_id = #{categoryId,jdbcType=INTEGER} 
+      </if>
+      <if test="cardName != null and '' != cardName" >
+        and card_name = #{cardName,jdbcType=VARCHAR} 
+      </if>
+      <if test="beginTime != null and beginTime !=''">
+        and create_time <![CDATA[>]]> #{beginTime,jdbcType=VARCHAR}
+      </if>
+      <if test="endTime != null and endTime !=''">
+        and create_time <![CDATA[<]]> #{endTime,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+    ORDER BY id asc
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_crm_card
+    <where> 1 = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="categoryId != null" >
+        and category_id = #{categoryId,jdbcType=INTEGER} 
+      </if>
+      <if test="cardName != null and '' != cardName" >
+        and card_name = #{cardName,jdbcType=VARCHAR} 
+      </if>
+      <if test="beginTime != null and beginTime !=''">
+        and create_time <![CDATA[>]]> #{beginTime,jdbcType=VARCHAR}
+      </if>
+      <if test="endTime != null and endTime !=''">
+        and create_time <![CDATA[<]]> #{endTime,jdbcType=VARCHAR}
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findByObject" resultMap="BaseResultMap" parameterType="com.saas.api.common.entity.crm.Card" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_card
+    <where> 1 = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="categoryId != null" >
+        and category_id = #{categoryId,jdbcType=INTEGER} 
+      </if>
+      <if test="cardName != null and '' != cardName" >
+        and card_name = #{cardName,jdbcType=VARCHAR} 
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findSelectObject" resultMap="SelectResultMap" parameterType="com.saas.api.common.entity.crm.Card" >
+    select 
+    <include refid="Select_Column_List" />
+    from saas_crm_card
+    <where> 1 = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="categoryId != null" >
+        and category_id = #{categoryId,jdbcType=INTEGER} 
+      </if>
+      <if test="cardName != null and '' != cardName" >
+        and card_name = #{cardName,jdbcType=VARCHAR} 
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+</mapper>

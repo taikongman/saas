@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.crm.CustomerPayDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.crm.CustomerPay" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="customer_name" property="customerName" jdbcType="VARCHAR" />
+    <result column="customer_phone" property="customerPhone" jdbcType="VARCHAR" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="project_type_id" property="projectTypeId" jdbcType="INTEGER" />
+    <result column="cash_mode" property="cashMode" jdbcType="INTEGER" />
+    <result column="car_id" property="carId" jdbcType="BIGINT" />
+    <result column="car_no" property="carNo" jdbcType="VARCHAR" />
+    <result column="need_pay" property="needPay" jdbcType="DECIMAL" />
+    <result column="account_pay" property="accountPay" jdbcType="DECIMAL" />
+    <result column="discount" property="discount" jdbcType="DECIMAL" />
+    <result column="real_pay" property="realPay" jdbcType="DECIMAL" />
+    <result column="already_invoice" property="alreadyInvoice" jdbcType="INTEGER" />
+    <result column="invoice_id" property="invoiceId" jdbcType="INTEGER" />
+    <result column="invoice_no" property="invoiceNo" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customer_id, customer_name, customer_phone, 
+    order_id, project_type_id, cash_mode, car_id, car_no, 
+    need_pay, account_pay, real_pay, discount, 
+    already_invoice, invoice_id, invoice_no, 
+    remark,  status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_customer_pay
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from saas_crm_customer_pay
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.CustomerPay" >
+    insert into saas_crm_customer_pay (customer_id, customer_name, customer_phone, 
+    order_id, project_type_id, cash_mode, car_id, car_no, 
+    need_pay, account_pay, real_pay, discount, 
+    already_invoice, invoice_id, invoice_no, 
+    remark,  status, create_time
+      )
+    values (#{customerId,jdbcType=BIGINT}, #{customerName,jdbcType=VARCHAR}, #{customerPhone,jdbcType=VARCHAR},  
+      #{orderId,jdbcType=BIGINT}, #{projectTypeId,jdbcType=INTEGER}, #{cashMode,jdbcType=INTEGER}, 
+      #{carId,jdbcType=BIGINT}, #{carNo,jdbcType=VARCHAR}, 
+      #{category,jdbcType=INTEGER}, #{payMode,jdbcType=INTEGER}, 
+      #{needPay,jdbcType=DECIMAL}, #{accountPay,jdbcType=DECIMAL}, #{realPay,jdbcType=DECIMAL}, #{discount,jdbcType=DECIMAL}, 
+      #{alreadyInvoice,jdbcType=INTEGER}, #{invoiceId,jdbcType=INTEGER}, #{invoiceNo,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.CustomerPay" >
+    insert into saas_crm_customer_pay
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="customerName != null" >
+        customer_name,
+      </if>
+      <if test="customerPhone != null" >
+        customer_phone,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="projectTypeId != null" >
+        project_type_id,
+      </if>
+      <if test="cashMode != null" >
+        cash_mode,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="carNo != null" >
+        car_no,
+      </if>
+      <if test="needPay != null" >
+        need_pay,
+      </if>
+      <if test="accountPay != null" >
+        account_pay,
+      </if>
+      <if test="realPay != null" >
+        real_pay,
+      </if>
+      <if test="discount != null" >
+        discount,
+      </if>
+      <if test="alreadyInvoice != null" >
+        already_invoice,
+      </if>
+      <if test="invoiceId != null" >
+        invoice_id,
+      </if>
+      <if test="invoiceNo != null" >
+        invoice_no,
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null" >
+        #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPhone != null" >
+        #{customerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="projectTypeId != null" >
+        #{projectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="cashMode != null" >
+        #{cashMode,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="carNo != null" >
+        #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="needPay != null" >
+        #{needPay,jdbcType=DECIMAL},
+      </if>
+      <if test="accountPay != null" >
+        #{accountPay,jdbcType=DECIMAL},
+      </if>
+      <if test="realPay != null" >
+        #{realPay,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="alreadyInvoice != null" >
+        #{alreadyInvoice,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceId != null" >
+        #{invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNo != null" >
+        #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.api.common.entity.crm.CustomerPay" >
+    update saas_crm_customer_pay
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="customerName != null" >
+        customer_name = #{customerName,jdbcType=VARCHAR},
+      </if>
+      <if test="customerPhone != null" >
+        customer_phone = #{customerPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="projectTypeId != null" >
+        project_type_id = #{projectTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="cashMode != null" >
+        cash_mode = #{cashMode,jdbcType=INTEGER},
+      </if>
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="carNo != null" >
+        car_no = #{carNo,jdbcType=VARCHAR},
+      </if>
+      <if test="needPay != null" >
+        need_pay = #{needPay,jdbcType=DECIMAL},
+      </if>
+      <if test="accountPay != null" >
+        account_pay = #{accountPay,jdbcType=DECIMAL},
+      </if>
+      <if test="realPay != null" >
+        real_pay = #{realPay,jdbcType=DECIMAL},
+      </if>
+      <if test="discount != null" >
+        discount = #{discount,jdbcType=DECIMAL},
+      </if>
+      <if test="alreadyInvoice != null" >
+        already_invoice = #{alreadyInvoice,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceId != null" >
+        invoice_id = #{invoiceId,jdbcType=INTEGER},
+      </if>
+      <if test="invoiceNo != null" >
+        invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.api.common.entity.crm.CustomerPay" >
+    update saas_crm_customer_pay
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      customer_name = #{customerName,jdbcType=VARCHAR},
+      customer_phone = #{customerPhone,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=BIGINT},
+      project_type_id = #{projectTypeId,jdbcType=INTEGER},
+      cash_mode = #{cashMode,jdbcType=INTEGER},
+      car_id = #{carId,jdbcType=BIGINT},
+      car_no = #{carNo,jdbcType=VARCHAR},
+      need_pay = #{needPay,jdbcType=DECIMAL},
+      account_pay = #{accountPay,jdbcType=DECIMAL},
+      real_pay = #{realPay,jdbcType=DECIMAL},
+      discount = #{discount,jdbcType=DECIMAL},
+      already_invoice = #{alreadyInvoice,jdbcType=INTEGER},
+      invoice_id = #{invoiceId,jdbcType=INTEGER},
+      invoice_no = #{invoiceNo,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByCustomerId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_customer_pay
+    <where>
+      customer_id = #{customerId,jdbcType=BIGINT}
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+</mapper>

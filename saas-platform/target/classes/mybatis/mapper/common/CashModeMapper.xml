@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.common.CashModeDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.common.CashMode" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="lan_type" property="lanType" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="SelectResultMap" type="com.saas.api.admin.res.select.common.CashModeSelect" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Select_Column_List" >
+    id, name
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name, remark, create_time, update_time
+  </sql>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_common_cash_mode
+    where id = #{id,jdbcType=INTEGER} 
+  </select>
+  <select id="findByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_common_cash_mode
+    where name = #{name,jdbcType=VARCHAR} 
+  </select>
+  <insert id="insertData" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.common.CashMode" >
+    insert into saas_common_cash_mode (name, remark, create_time, lan_type)
+    values (#{name,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
+    #{createTime,jdbcType=TIMESTAMP}, 
+    #{lanType,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.common.CashMode" >
+    insert into saas_common_cash_mode
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="name != null and '' != name" >
+        name,
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lanType != null" >
+        lan_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="name != null and '' != name" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lanType != null" >
+        #{lanType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateData" parameterType="com.saas.api.common.entity.common.CashMode" >
+    update saas_common_cash_mode
+    <set >
+      <if test="name != null and '' != name" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark = #{remark,jdbcType=VARCHAR}, 
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER} 
+  </update>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from saas_common_cash_mode
+    where id = #{id,jdbcType=INTEGER} 
+  </delete>
+  <select id="listData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from saas_common_cash_mode
+    <where> 1 = 1
+      <if test="id != null" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+    ORDER BY id desc
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_common_cash_mode
+    <where> 1 = 1
+      <if test="id != null" >
+        and id = #{id,jdbcType=INTEGER}
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findByObject" resultMap="BaseResultMap" parameterType="com.saas.api.common.entity.common.CashMode" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_common_cash_mode
+    <where> 1 = 1
+      <if test="name != null and '' != name" >
+        and name = #{name,jdbcType=VARCHAR} 
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findSelectObject" resultMap="SelectResultMap" parameterType="com.saas.api.common.entity.common.CashMode" >
+    select 
+    <include refid="Select_Column_List" />
+    from saas_common_cash_mode
+    <where> 1 = 1
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+</mapper>

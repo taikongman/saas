@@ -1,0 +1,778 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.crm.InventoryRecordDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.crm.InventoryRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="admin_id" property="adminId" jdbcType="BIGINT" />
+    <result column="purchase_id" property="purchaseId" jdbcType="BIGINT" />
+    <result column="purchase_code" property="purchaseCode" jdbcType="VARCHAR" />
+    <result column="commodity_id" property="commodityId" jdbcType="BIGINT" />
+    <result column="commodity_code" property="commodityCode" jdbcType="VARCHAR" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+    <result column="specification" property="specification" jdbcType="VARCHAR" />
+    <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="supplier_code" property="supplierCode" jdbcType="VARCHAR" />
+    <result column="supplier_name" property="supplierName" jdbcType="VARCHAR" />
+    <result column="bar_code" property="barCode" jdbcType="VARCHAR" />
+    <result column="cost_price" property="costPrice" jdbcType="DECIMAL" />
+    <result column="tax_ratio" property="taxRatio" jdbcType="INTEGER" />
+    <result column="tax_amount" property="taxAmount" jdbcType="DECIMAL" />
+    <result column="tax_price" property="taxPrice" jdbcType="DECIMAL" />
+    <result column="cost_has_tax" property="costHasTax" jdbcType="INTEGER" />
+    <result column="adjust_ratio" property="adjustRatio" jdbcType="INTEGER" />
+    <result column="sale_price" property="salePrice" jdbcType="DECIMAL" />
+    <result column="quantity" property="quantity" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="remain_quantity" property="remainQuantity" jdbcType="INTEGER" />
+    <result column="up_quantity" property="upQuantity" jdbcType="INTEGER" />
+    <result column="down_quantity" property="downQuantity" jdbcType="INTEGER" />
+    <result column="unit_id" property="unitId" jdbcType="INTEGER" />
+    <result column="unit_name" property="unitName" jdbcType="VARCHAR" />
+    <result column="operator_id" property="operatorId" jdbcType="BIGINT" />
+    <result column="operator_name" property="operatorName" jdbcType="VARCHAR" />
+    <result column="warehouse_id" property="warehouseId" jdbcType="INTEGER" />
+    <result column="warehouse_name" property="warehouseName" jdbcType="VARCHAR" />
+    <result column="location_id" property="locationId" jdbcType="BIGINT" />
+    <result column="location_name" property="locationName" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="lan_type" property="lanType" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, group_id, company_id, department_id, admin_id, purchase_id, purchase_code, commodity_id, commodity_code, commodity_name, 
+    specification, supplier_id, supplier_code, supplier_name, bar_code, 
+    cost_price, tax_ratio, tax_amount, tax_price, cost_has_tax, adjust_ratio, sale_price, quantity, amount, 
+    remain_quantity, up_quantity, down_quantity, 
+    unit_id, unit_name, operator_id, operator_name, 
+    warehouse_id, warehouse_name, location_id, location_name, 
+    remark, status, create_time, update_time, version
+  </sql>
+  <resultMap id="SelectResultMap" type="com.saas.api.admin.res.select.crm.InventoryRecordSelect" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="commodity_name" property="commodityName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Select_Column_List" >
+    id, commodity_name 
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_inventory_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from saas_crm_inventory_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.InventoryRecord" >
+    insert into saas_crm_inventory_record (group_id, company_id, department_id, admin_id, 
+      purchase_id, purchase_code, commodity_id, commodity_code, commodity_name, 
+      specification, supplier_id, supplier_code, supplier_name, bar_code, 
+      cost_price, tax_ratio, tax_amount, tax_price, cost_has_tax, adjust_ratio, sale_price, quantity, amount, 
+      remain_quantity, up_quantity, down_quantity, 
+      unit_id, unit_name, operator_id, operator_name, 
+      warehouse_id, warehouse_name, location_id, location_name, 
+      remark, status, create_time, version, lan_type
+      )
+    values (#{groupId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, #{adminId,jdbcType=BIGINT}, 
+      #{purchaseId,jdbcType=BIGINT}, #{purchaseCode,jdbcType=VARCHAR}, 
+      #{commodityId,jdbcType=BIGINT}, #{commodityCode,jdbcType=VARCHAR}, #{commodityName,jdbcType=VARCHAR}, 
+      #{specification,jdbcType=VARCHAR}, #{supplierId,jdbcType=INTEGER}, #{supplierCode,jdbcType=VARCHAR}, #{supplierName,jdbcType=VARCHAR}, 
+      #{barCode,jdbcType=VARCHAR}, 
+      #{costPrice,jdbcType=DECIMAL}, #{taxRatio,jdbcType=INTEGER}, #{taxAmount,jdbcType=INTEGER}, #{taxPrice,jdbcType=DECIMAL}, 
+      #{costHasTax,jdbcType=INTEGER}, #{adjustRatio,jdbcType=INTEGER}, #{salePrice,jdbcType=DECIMAL}, #{quantity,jdbcType=INTEGER}, 
+      #{amount,jdbcType=DECIMAL}, 
+      #{remainQuantity,jdbcType=INTEGER}, #{upQuantity,jdbcType=INTEGER}, #{downQuantity,jdbcType=INTEGER}, 
+      #{unitId,jdbcType=INTEGER}, #{unitName,jdbcType=VARCHAR}, #{operatorId,jdbcType=BIGINT}, #{operatorName,jdbcType=VARCHAR}, 
+      #{warehouseId,jdbcType=INTEGER}, #{warehouseName,jdbcType=VARCHAR}, #{locationId,jdbcType=BIGINT}, #{locationName,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}, #{lanType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.InventoryRecord" >
+    insert into saas_crm_inventory_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="purchaseId != null" >
+        purchase_id,
+      </if>
+      <if test="purchaseCode != null and '' != purchaseCode" >
+        purchase_code,
+      </if>
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="commodityCode != null and '' != commodityCode" >
+        commodity_code,
+      </if>
+      <if test="commodityName != null and '' != commodityName" >
+        commodity_name,
+      </if>
+      <if test="specification != null and '' != specification" >
+        specification,
+      </if>
+      <if test="supplierId != null" >
+        supplier_id,
+      </if>
+      <if test="supplierCode != null and '' != supplierCode" >
+        supplier_code,
+      </if>
+      <if test="supplierName != null and '' != supplierName" >
+        supplier_name,
+      </if>
+      <if test="barCode != null and '' != barCode" >
+        bar_code,
+      </if>
+      <if test="costPrice != null" >
+        cost_price,
+      </if>
+      <if test="taxRatio != null" >
+        tax_ratio,
+      </if>
+      <if test="taxAmount != null" >
+        tax_amount,
+      </if>
+      <if test="taxPrice != null" >
+        tax_price,
+      </if>
+      <if test="costHasTax != null" >
+        cost_has_tax,
+      </if>
+      <if test="adjustRatio != null" >
+        adjust_ratio,
+      </if>
+      <if test="salePrice != null" >
+        sale_price,
+      </if>
+      <if test="quantity != null" >
+        quantity,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="remainQuantity != null" >
+        remain_quantity,
+      </if>
+      <if test="upQuantity != null" >
+        up_quantity,
+      </if>
+      <if test="downQuantity != null" >
+        down_quantity,
+      </if>
+      <if test="unitId != null" >
+        unit_id,
+      </if>
+      <if test="unitName != null '' != unitName" >
+        unit_name,
+      </if>
+      <if test="operatorId != null" >
+        operator_id,
+      </if>
+      <if test="operatorName != null and '' != operatorName" >
+        operator_name,
+      </if>
+      <if test="warehouseId != null" >
+        warehouse_id,
+      </if>
+      <if test="warehouseName != null and '' != warehouseName" >
+        warehouse_name,
+      </if>
+      <if test="locationId != null" >
+        location_id,
+      </if>
+      <if test="locationName != null and '' != locationName" >
+        location_name,
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        lan_type,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseId != null" >
+        #{purchaseId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseCode != null and '' != purchaseCode" >
+        #{purchaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=BIGINT},
+      </if>
+      <if test="commodityCode != null and '' != commodityCode" >
+        #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null and '' != commodityName" >
+        #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null and '' != specification" >
+        #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierCode != null and '' != supplierCode" >
+        #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null and '' != supplierName" >
+        #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null and '' != barCode" >
+        #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="costPrice != null" >
+        #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="taxRatio != null" >
+        #{taxRatio,jdbcType=INTEGER},
+      </if>
+      <if test="taxAmount != null" >
+        #{taxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="taxPrice != null" >
+        #{taxPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costHasTax != null" >
+        #{costHasTax,jdbcType=INTEGER},
+      </if>
+      <if test="adjustRatio != null" >
+        #{adjustRatio,jdbcType=INTEGER},
+      </if>
+      <if test="salePrice != null" >
+        #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null" >
+        #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="remainQuantity != null" >
+        #{remainQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="upQuantity != null" >
+        #{upQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="downQuantity != null" >
+        #{downQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitId != null" >
+        #{unitId,jdbcType=INTEGER},
+      </if>
+      <if test="unitName != null and '' != unitName" >
+        #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null" >
+        #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorName != null and '' != operatorName" >
+        #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null" >
+        #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseName != null and '' != warehouseName" >
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="locationId != null" >
+        #{locationId,jdbcType=BIGINT},
+      </if>
+      <if test="locationName != null and '' != locationName" >
+        #{locationName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        #{lanType,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.api.common.entity.crm.InventoryRecord" >
+    update saas_crm_inventory_record
+    <set >
+      <if test="purchaseCode != null and '' != purchaseCode" >
+        purchase_code = #{purchaseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityId != null" >
+        commodity_id = #{commodityId,jdbcType=BIGINT},
+      </if>
+      <if test="commodityCode != null and '' != commodityCode" >
+        commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      </if>
+      <if test="commodityName != null and '' != commodityName" >
+        commodity_name = #{commodityName,jdbcType=VARCHAR},
+      </if>
+      <if test="specification != null and '' != specification" >
+        specification = #{specification,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierId != null and '' != supplierId" >
+        supplier_id = #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="supplierCode != null and '' != supplierCode" >
+        supplier_code = #{supplierCode,jdbcType=VARCHAR},
+      </if>
+      <if test="supplierName != null and '' != supplierName" >
+        supplier_name = #{supplierName,jdbcType=VARCHAR},
+      </if>
+      <if test="barCode != null and '' != barCode" >
+        bar_code = #{barCode,jdbcType=VARCHAR},
+      </if>
+      <if test="costPrice != null" >
+        cost_price = #{costPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="taxRatio != null" >
+        tax_ratio = #{taxRatio,jdbcType=INTEGER},
+      </if>
+      <if test="taxAmount != null" >
+        tax_amount = #{taxAmount,jdbcType=DECIMAL},
+      </if>
+      <if test="taxPrice != null" >
+        tax_price = #{taxPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="costHasTax != null" >
+        cost_has_tax = #{costHasTax,jdbcType=INTEGER},
+      </if>
+      <if test="adjustRatio != null" >
+        adjust_ratio = #{adjustRatio,jdbcType=INTEGER},
+      </if>
+      <if test="salePrice != null" >
+        sale_price = #{salePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="quantity != null" >
+        quantity = #{quantity,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="remainQuantity != null" >
+        remain_quantity = #{remainQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="upQuantity != null" >
+        up_quantity = #{upQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="downQuantity != null" >
+        down_quantity = #{downQuantity,jdbcType=INTEGER},
+      </if>
+      <if test="unitId != null" >
+        unit_id = #{unitId,jdbcType=INTEGER},
+      </if>
+      <if test="unitName != null and '' != unitName" >
+        unit_name = #{unitName,jdbcType=VARCHAR},
+      </if>
+      <if test="operatorId != null" >
+        operator_id = #{operatorId,jdbcType=BIGINT},
+      </if>
+      <if test="operatorName != null and '' != operatorName" >
+        operator_name = #{operatorName,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null" >
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
+      <if test="warehouseName != null and '' != warehouseName" >
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="locationId != null" >
+        location_id = #{locationId,jdbcType=BIGINT},
+      </if>
+      <if test="locationName != null and '' != locationName" >
+        location_name = #{locationName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.api.common.entity.crm.InventoryRecord" >
+    update saas_crm_inventory_record
+    set purchase_code = #{purchaseCode,jdbcType=VARCHAR},
+      commodity_id = #{commodityId,jdbcType=BIGINT},
+      commodity_code = #{commodityCode,jdbcType=VARCHAR},
+      commodity_name = #{commodityName,jdbcType=VARCHAR},
+      specification = #{specification,jdbcType=VARCHAR},
+      supplier_id = #{supplierId,jdbcType=INTEGER},
+      supplier_code = #{supplierCode,jdbcType=VARCHAR},
+      supplier_name = #{supplierName,jdbcType=VARCHAR},
+      bar_code = #{barCode,jdbcType=VARCHAR},
+      cost_price = #{costPrice,jdbcType=DECIMAL},
+      tax_ratio = #{taxRatio,jdbcType=INTEGER},
+      tax_amount = #{taxAmount,jdbcType=DECIMAL},
+      tax_price = #{taxPrice,jdbcType=DECIMAL},
+      cost_has_tax = #{costHasTax,jdbcType=INTEGER},
+      adjust_ratio = #{adjustRatio,jdbcType=INTEGER},
+      sale_price = #{salePrice,jdbcType=DECIMAL},
+      quantity = #{remark,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      remain_quantity = #{remainQuantity,jdbcType=INTEGER},
+      up_quantity = #{upQuantity,jdbcType=INTEGER},
+      down_quantity = #{downQuantity,jdbcType=INTEGER},
+      unit_id = #{unitId,jdbcType=INTEGER},
+      unit_name = #{unitName,jdbcType=VARCHAR},
+      operator_id = #{operatorId,jdbcType=BIGINT},
+      operator_name = #{operatorName,jdbcType=VARCHAR},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      location_id = #{locationId,jdbcType=BIGINT},
+      location_name = #{locationName,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateRemainQuantity" parameterType="java.lang.Integer" >
+    update saas_crm_inventory_record
+    set remain_quantity = #{remainQuantity,jdbcType=INTEGER} 
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateWarehouseLocation" parameterType="java.lang.Long" >
+    update saas_crm_inventory_record
+    set location_id = #{locationId,jdbcType=BIGINT},
+      location_name = #{locationName,jdbcType=VARCHAR} 
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="listData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_inventory_record
+    <where> 1=1 
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="purchaseCode != null and '' != purchaseCode" >
+        and purchase_code = #{purchaseCode,jdbcType=VARCHAR} 
+      </if>
+      <if test="commodityId != null">
+        and commodity_id = #{commodityId,jdbcType=BIGINT}
+      </if>
+      <if test="supplierId != null">
+        and supplier_id = #{supplierId,jdbcType=INTEGER}
+      </if>
+      <if test="operatorId != null">
+        and operator_id = #{operatorId,jdbcType=BIGINT}
+      </if>
+      <if test="beginTime != null and beginTime !=''">
+        and create_time <![CDATA[>]]> #{beginTime,jdbcType=VARCHAR}
+      </if>
+      <if test="endTime != null and endTime !=''">
+        and create_time <![CDATA[<]]> #{endTime,jdbcType=VARCHAR}
+      </if>
+      <if test="commodityName != null and commodityName !=''">
+        and commodity_name LIKE "%"#{commodityName}"%"
+      </if>
+      <if test="supplierName != null and supplierName !=''">
+        and supplier_name LIKE "%"#{supplierName}"%"
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_crm_inventory_record
+    <where> 1=1 
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="purchaseCode != null and '' != purchaseCode" >
+        and purchase_code = #{purchaseCode,jdbcType=VARCHAR} 
+      </if>
+      <if test="commodityId != null">
+        and commodity_id = #{commodityId,jdbcType=BIGINT}
+      </if>
+      <if test="supplierId != null">
+        and supplier_id = #{supplierId,jdbcType=INTEGER}
+      </if>
+      <if test="operatorId != null">
+        and operator_id = #{operatorId,jdbcType=BIGINT}
+      </if>
+      <if test="beginTime != null and beginTime !=''">
+        and create_time <![CDATA[>]]> #{beginTime,jdbcType=VARCHAR}
+      </if>
+      <if test="endTime != null and endTime !=''">
+        and create_time <![CDATA[<]]> #{endTime,jdbcType=VARCHAR}
+      </if>
+      <if test="commodityName != null and commodityName !=''">
+        and commodity_name LIKE "%"#{commodityName}"%"
+      </if>
+      <if test="supplierName != null and supplierName !=''">
+        and supplier_name LIKE "%"#{supplierName}"%"
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findByObject" parameterType="com.saas.api.common.entity.crm.InventoryRecord" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_inventory_record
+    <where> 1=1 
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="purchaseCode != null and '' != purchaseCode" >
+        and purchase_code = #{purchaseCode,jdbcType=VARCHAR} 
+      </if>
+      <if test="commodityId != null">
+        and commodity_id = #{commodityId,jdbcType=BIGINT}
+      </if>
+      <if test="supplierId != null">
+        and supplier_id = #{supplierId,jdbcType=INTEGER}
+      </if>
+      <if test="operatorId != null">
+        and operator_id = #{operatorId,jdbcType=BIGINT}
+      </if>
+      <if test="warehouseId != null">
+        and warehouse_id = #{warehouseId,jdbcType=BIGINT}
+      </if>
+      <if test="commodityName != null and commodityName !=''">
+        and commodity_name LIKE "%"#{commodityName}"%"
+      </if>
+      <if test="supplierName != null and supplierName !=''">
+        and supplier_name LIKE "%"#{supplierName}"%"
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="selectByPurchaseId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_inventory_record
+    <where> 1=1 and purchase_id = #{purchaseId,jdbcType=BIGINT}
+    </where>
+  </select>
+  <select id="selectByPurchaseCode" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_inventory_record
+    <where> 1=1 and purchase_code = #{purchaseCode,jdbcType=VARCHAR} 
+    </where>
+  </select>
+  <select id="countByCommodityId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_crm_inventory_record
+    <where>
+        commodity_id = #{commodityId,jdbcType=BIGINT}
+    </where>
+  </select>
+  <select id="findSelectObject" resultMap="SelectResultMap" parameterType="com.saas.api.common.entity.crm.InventoryRecord" >
+    select 
+    <include refid="Select_Column_List" />
+    from saas_crm_inventory_record
+    <where> 1 = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="supplierId != null">
+        and supplier_id = #{supplierId,jdbcType=INTEGER}
+      </if>
+      <if test="operatorId != null">
+        and operator_id = #{operatorId,jdbcType=BIGINT}
+      </if>
+      <if test="warehouseId != null">
+        and warehouse_id = #{warehouseId,jdbcType=BIGINT}
+      </if>
+      <if test="commodityId != null">
+        and commodity_id = #{commodityId,jdbcType=BIGINT}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="defaultMaterialList" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_inventory_record
+    <where>
+      status = 1 
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+      ORDER BY create_time
+    </where>
+  </select>
+  <select id="commodityList4OrCond" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_inventory_record
+    <where>
+      status = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="searchCond != null and searchCond !=''">
+        and ( commodity_code LIKE "%"#{searchCond}"%" or code commodity_name "%"#{searchCond}"%")
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+    ORDER BY create_time desc
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countCommodity4OrCond" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_crm_inventory_record
+    <where>
+      status = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="searchCond != null and searchCond !=''">
+        and ( commodity_code LIKE "%"#{searchCond}"%" or commodity_name LIKE "%"#{searchCond}"%")
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+</mapper>

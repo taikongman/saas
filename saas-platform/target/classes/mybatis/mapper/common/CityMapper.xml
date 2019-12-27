@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.common.CityDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.common.City" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="city_id" property="cityId" jdbcType="VARCHAR" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+    <result column="auto_code" property="autoCode" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="DECIMAL" />
+    <result column="latitude" property="latitude" jdbcType="DECIMAL" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="AutoCodeResultMap" type="java.lang.String" >
+    <result column="auto_code" property="autoCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="SelectResultMap" type="com.saas.api.admin.res.select.common.CitySelect" >
+    <result column="city_id" property="cityId" jdbcType="VARCHAR" />
+    <result column="city_name" property="cityName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Select_Column_List" >
+    city_id, city_name 
+  </sql>
+  <sql id="Base_Column_List" >
+    city_id, city_name, auto_code, longitude, latitude, province_id
+  </sql>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_common_city
+    where city_id = #{cityId,jdbcType=VARCHAR} 
+  </select>
+  <select id="findByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_common_city
+    where city_name = #{cityName,jdbcType=VARCHAR} 
+  </select>
+  <insert id="insertData" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.common.City" >
+    insert into saas_common_city (city_id, city_name, auto_code, longitude, latitude, province_id)
+    values (#{cityId,jdbcType=VARCHAR}, #{cityName,jdbcType=VARCHAR}, 
+    #{autoCode,jdbcType=VARCHAR}, #{longitude,jdbcType=DECIMAL}, 
+    #{latitude,jdbcType=DECIMAL}, #{provinceId,jdbcType=VARCHAR} 
+    )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.common.City" >
+    insert into saas_common_city
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cityId != null and '' != cityId" >
+        city_id,
+      </if>
+      <if test="cityName != null and '' != cityName" >
+        city_name,
+      </if>
+      <if test="autoCode != null and '' != autoCode" >
+        auto_code,
+      </if>
+      <if test="longitude != null" >
+        longitude,
+      </if>
+      <if test="latitude != null" >
+        latitude,
+      </if>
+      <if test="provinceId != null and '' != provinceId" >
+        province_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cityId != null and '' != cityId" >
+        #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="cityName != null and '' != cityName" >
+        #{cityName,jdbcType=VARCHAR},
+      </if>
+      <if test="autoCode != null and '' != autoCode" >
+        #{autoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        #{longitude,jdbcType=DECIMAL}, 
+      </if>
+      <if test="latitude != null" >
+        #{latitude,jdbcType=DECIMAL},
+      </if>
+      <if test="provinceId != null and '' != provinceId" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateData" parameterType="com.saas.api.common.entity.common.City" >
+    update saas_common_city
+    <set >
+      <if test="autoCode != null and '' != autoCode" >
+        auto_code = #{autoCode,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null" >
+        longitude = #{longitude,jdbcType=DECIMAL}, 
+      </if>
+      <if test="latitude != null" >
+        latitude = #{latitude,jdbcType=DECIMAL},
+      </if>
+    </set>
+    where city_id = #{cityId,jdbcType=VARCHAR} 
+  </update>
+  <delete id="deleteById" parameterType="java.lang.String" >
+    delete from saas_common_city
+    where city_id = #{cityId,jdbcType=VARCHAR} 
+  </delete>
+  <select id="listData" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from saas_common_city
+    <where> 1 = 1
+      <if test="provinceId != null and '' != provinceId" >
+        and province_id = #{provinceId,jdbcType=VARCHAR}
+      </if>
+      <if test="cityId != null and '' != cityId" >
+        and city_id = #{cityId,jdbcType=VARCHAR} 
+      </if>
+    </where>
+    ORDER BY city_id desc
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_common_city
+    <where> 1 = 1
+      <if test="provinceId != null and '' != provinceId" >
+        and province_id = #{provinceId,jdbcType=VARCHAR} 
+      </if>
+      <if test="cityId != null and '' != cityId" >
+        and city_id = #{cityId,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findByObject" resultMap="BaseResultMap" parameterType="com.saas.api.common.entity.common.City" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_common_city
+    <where> 1 = 1
+      <if test="provinceId != null and '' != provinceId" >
+        and province_id = #{provinceId,jdbcType=VARCHAR} 
+      </if>
+      <if test="cityId != null and '' != cityId" >
+        and city_id = #{cityId,jdbcType=VARCHAR} 
+      </if>
+      <if test="autoCode != null and '' != autoCode" >
+        and auto_code = #{autoCode,jdbcType=VARCHAR} 
+      </if>
+      <if test="longitude != null" >
+        and longitude = #{longitude,jdbcType=DECIMAL} 
+      </if>
+      <if test="latitude != null" >
+        and latitude = #{latitude,jdbcType=DECIMAL} 
+      </if>
+    </where>
+  </select>
+  <select id="findAllAutoCode" resultMap="AutoCodeResultMap" >
+    select auto_code from saas_common_city where auto_code is not null
+  </select>
+  <select id="findSelectObject" resultMap="SelectResultMap" parameterType="com.saas.api.common.entity.common.City" >
+    select 
+    <include refid="Select_Column_List" />
+    from saas_common_city
+    <where> 1 = 1
+      <if test="provinceId != null and '' != provinceId" >
+        and province_id = #{provinceId,jdbcType=VARCHAR} 
+      </if>
+      <if test="cityId != null and '' != cityId" >
+        and city_id = #{cityId,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+</mapper>

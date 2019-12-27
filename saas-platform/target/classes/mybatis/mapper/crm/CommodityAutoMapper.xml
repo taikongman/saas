@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.crm.CommodityAutoDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.crm.CommodityAuto" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="commodity_id" property="commodityId" jdbcType="BIGINT" />
+    <result column="brand_id" property="brandId" jdbcType="INTEGER" />
+    <result column="brand_name" property="brandName" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, commodity_id, brand_id, brand_name, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_commodity_auto
+    where id = #{id,jdbcType=BIGINT} 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from saas_crm_commodity_auto
+    where id = #{id,jdbcType=BIGINT} 
+  </delete>
+  <delete id="deleteByCommodityId" parameterType="java.lang.Long" >
+    delete from saas_crm_commodity_auto
+    where commodity_id = #{commodityId,jdbcType=BIGINT} 
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="commodityId" parameterType="com.saas.api.common.entity.crm.CommodityAuto" >
+    insert into saas_crm_commodity_auto (commodity_id, brand_id, brand_name, create_time)
+    values (#{commodityId,jdbcType=INTEGER}, #{brandId,jdbcType=INTEGER}, #{brandName,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.CommodityAuto" >
+    insert into saas_crm_commodity_auto
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="commodityId != null" >
+        commodity_id,
+      </if>
+      <if test="brandId != null" >
+        brand_id,
+      </if>
+      <if test="brandName != null and '' != brandName" >
+        brand_name,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="commodityId != null" >
+        #{commodityId,jdbcType=INTEGER},
+      </if>
+      <if test="brandId != null" >
+        #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="brandName != null and '' != brandName" >
+        #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.api.common.entity.crm.CommodityAuto" >
+    update saas_crm_commodity_auto
+    <set >
+      <if test="brandId != null" >
+        brand_id = #{brandId,jdbcType=INTEGER},
+      </if>
+      <if test="brandName != null and '' != brandName" >
+        brand_name = #{brandName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT} 
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.api.common.entity.crm.CommodityAuto" >
+    update saas_crm_commodity_auto
+    set brand_id = #{brandId,jdbcType=INTEGER},
+      brand_name = #{brandName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP} 
+    where id = #{id,jdbcType=BIGINT} 
+  </update>
+  <select id="findByObject" resultMap="BaseResultMap" parameterType="com.saas.api.common.entity.crm.CommodityAuto" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_commodity_auto
+    <where> 1 = 1
+      <if test="id != null" >
+        and id = #{id,jdbcType=BIGINT} 
+      </if>
+      <if test="commodityId != null" >
+        and commodity_id = #{commodityId,jdbcType=BIGINT} 
+      </if>
+      <if test="brandId != null" >
+        and brand_id = #{brandId,jdbcType=INTEGER} 
+      </if>
+    </where>
+  </select>
+  <select id="findByCommodityId" resultMap="BaseResultMap" parameterType="com.saas.api.common.entity.crm.CommodityAuto" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_commodity_auto
+    <where> commodity_id = #{commodityId,jdbcType=BIGINT} 
+    </where>
+  </select>
+</mapper>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.sys.SoftwareversionDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.sys.Softwareversion" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="appname" property="appname" jdbcType="VARCHAR" />
+    <result column="osname" property="osname" jdbcType="VARCHAR" />
+    <result column="version" property="version" jdbcType="VARCHAR" />
+    <result column="url" property="url" jdbcType="VARCHAR" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="lantype" property="lantype" jdbcType="VARCHAR" />
+    <result column="createtime" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, appname, osname, version, url, note, lantype, createtime, updatetime
+  </sql>
+  <select id="findCheckVersion" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from xw_sys_softwareversion
+    <where> 1 = 1
+      <if test="appname != null" >
+        and appname = #{appname,jdbcType=VARCHAR} 
+      </if>
+      <if test="osname != null" >
+        and osname = #{osname,jdbcType=VARCHAR} 
+      </if>
+      <if test="version != null" >
+        and version = #{version,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="listData" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from xw_sys_softwareversion
+    <where> 1 = 1
+      <if test="appname != null" >
+        and appname = #{appname,jdbcType=VARCHAR} 
+      </if>
+      <if test="osname != null" >
+        and osname = #{osname,jdbcType=VARCHAR} 
+      </if>
+      <if test="version != null" >
+        and version = #{version,jdbcType=VARCHAR} 
+      </if>
+    </where>
+    ORDER BY createtime desc
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.String" resultType="java.lang.Integer">
+    select
+    count(1)
+    from xw_sys_softwareversion
+    <where> 1 = 1
+      <if test="appname != null" >
+        and appname = #{appname,jdbcType=VARCHAR} 
+      </if>
+      <if test="osname != null" >
+        and osname = #{osname,jdbcType=VARCHAR} 
+      </if>
+      <if test="version != null" >
+        and version = #{version,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from xw_sys_softwareversion
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insertData" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.sys.Company" >
+    insert into xw_sys_softwareversion (appname, osname, version, url, note, lantype, createtime)
+    values (#{appname,jdbcType=VARCHAR}, #{osname,jdbcType=VARCHAR}, #{version,jdbcType=VARCHAR},
+    #{url,jdbcType=VARCHAR}, #{note,jdbcType=VARCHAR}, #{lantype,jdbcType=VARCHAR}, 
+    #{createTime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+  <update id="updateData" parameterType="com.saas.api.common.entity.sys.Company" >
+    update xw_sys_softwareversion
+    <set >
+      <if test="appname != null" >
+        appname = #{appname,jdbcType=VARCHAR},
+      </if>
+      <if test="osname != null" >
+        osname = #{osname,jdbcType=VARCHAR},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null" >
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from xw_sys_softwareversion
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+</mapper>

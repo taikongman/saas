@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "cors",
+      "type": "com.saas.api.common.config.CorsConfig",
+      "sourceType": "com.saas.api.common.config.CorsConfig"
+    },
+    {
+      "name": "public-file",
+      "type": "com.saas.api.common.config.PublicFileUrlConfig",
+      "sourceType": "com.saas.api.common.config.PublicFileUrlConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "cors.allowed-headers",
+      "type": "java.lang.String",
+      "sourceType": "com.saas.api.common.config.CorsConfig"
+    },
+    {
+      "name": "cors.allowed-methods",
+      "type": "java.lang.String",
+      "sourceType": "com.saas.api.common.config.CorsConfig"
+    },
+    {
+      "name": "cors.allowed-origins",
+      "type": "java.lang.String",
+      "sourceType": "com.saas.api.common.config.CorsConfig"
+    }
+  ],
+  "hints": []
+}

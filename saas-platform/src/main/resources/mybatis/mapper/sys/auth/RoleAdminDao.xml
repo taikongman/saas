@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.sys.auth.RoleAdminDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.sys.auth.RoleAdmin" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="admin_id" property="adminId" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, admin_id
+  </sql>
+  <select id="listByAdminIdIn" resultType="com.saas.api.common.entity.sys.auth.RoleAdmin">
+        SELECT role_id,admin_id
+        FROM saas_sys_auth_role_admin
+        where admin_id in
+        <foreach collection="list" item="adminId" index="index" open="(" close=")" separator=",">
+            #{adminId}
+        </foreach>
+    </select>
+    <select id="listByRoleId" resultType="com.saas.api.common.entity.sys.auth.RoleAdmin">
+        SELECT admin_id
+        FROM saas_sys_auth_role_admin
+        where role_id = #{roleId,jdbcType=INTEGER} 
+    </select>
+    <select id="findByRoleId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT role_id,admin_id
+        FROM saas_sys_auth_role_admin
+        where role_id = #{roleId,jdbcType=INTEGER} 
+    </select>
+    <select id="findByAdminId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT role_id,admin_id
+        FROM saas_sys_auth_role_admin
+        where admin_id = #{adminId,jdbcType=INTEGER}
+    </select>
+    <insert id="insertData" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.sys.auth.RoleAdmin" >
+      insert into saas_sys_auth_role_admin (role_id, admin_id)
+      values (#{roleId,jdbcType=INTEGER}, #{adminId,jdbcType=INTEGER}
+      )
+    </insert>
+    <update id="updateData" parameterType="com.saas.api.common.entity.sys.auth.RoleAdmin" >
+     update saas_sys_auth_role_admin
+      <set >
+       <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+       </if>
+      </set>
+      where id = #{id,jdbcType=INTEGER} 
+    </update>
+    <update id="updateDataByAdminId" parameterType="com.saas.api.common.entity.sys.auth.RoleAdmin" >
+     update saas_sys_auth_role_admin
+      <set >
+       <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=INTEGER},
+       </if>
+      </set>
+      where admin_id = #{adminId,jdbcType=INTEGER}
+    </update>
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from saas_sys_auth_role_admin where id = #{id,jdbcType=INTEGER} 
+    </delete>
+    <delete id="deleteByAdminId" parameterType="java.lang.Integer">
+        delete from saas_sys_auth_role_admin where admin_id = #{adminId,jdbcType=INTEGER}
+    </delete>
+</mapper>

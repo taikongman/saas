@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.crm.SupplierBankDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.crm.SupplierBank" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="supplier_id" property="supplierId" jdbcType="INTEGER" />
+    <result column="account_name" property="accountName" jdbcType="VARCHAR" />
+    <result column="tax_no" property="taxNo" jdbcType="VARCHAR" />
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR" />
+    <result column="bank_no" property="bankNo" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="full_address" property="fullAddress" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, supplier_id, account_name, tax_no, bank_name, bank_no, contact, phone, 
+    province_id, province, city_id, city, area_id, area, province_id, address, full_address, 
+    remark, status, create_time, update_time 
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from saas_crm_supplier_bank
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="findByBankNo" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from saas_crm_supplier_bank
+    where supplier_id = #{supplierId,jdbcType=INTEGER} and bank_no = #{bankNo,jdbcType=VARCHAR} 
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from saas_crm_supplier_bank
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteBySupplierId" parameterType="java.lang.Integer" >
+    delete from saas_crm_supplier_bank
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.SupplierBank" >
+    insert into saas_crm_supplier_bank (supplier_id, account_name, tax_no, bank_name, bank_no, contact, phone, 
+    province_id, province, city_id, city, area_id, area, address, full_address, 
+    remark, status, create_time)
+    values (#{supplierId,jdbcType=INTEGER},  
+      #{accountName,jdbcType=VARCHAR}, #{taxNo,jdbcType=VARCHAR}, #{bankName,jdbcType=VARCHAR}, #{bankNo,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{provinceId,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{cityId,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{areaId,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{fullAddress,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP} 
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.SupplierBank" >
+    insert into saas_crm_supplier_bank
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        supplier_id,
+      </if>
+      <if test="accountName != null and '' != accountName" >
+        account_name,
+      </if>
+      <if test="taxNo != null and '' != taxNo" >
+        tax_no,
+      </if>
+      <if test="bankName != null and '' != bankName" >
+        bank_name,
+      </if>
+      <if test="bankNo != null and '' != bankNo" >
+        bank_no,
+      </if>
+      <if test="contact != null and '' != contact" >
+        contact,
+      </if>
+      <if test="phone != null and '' != phone" >
+        phone,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="fullAddress != null" >
+        full_address,
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="supplierId != null" >
+        #{supplierId,jdbcType=INTEGER},
+      </if>
+      <if test="accountName != null and '' != accountName" >
+        #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNo != null and '' != taxNo" >
+        #{taxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null and '' != bankName" >
+        #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null and '' != bankNo" >
+        #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null and '' != contact" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null and '' != phone" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fullAddress != null" >
+        #{fullAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.api.common.entity.crm.SupplierBank" >
+    update saas_crm_supplier_bank
+    <set >
+      <if test="accountName != null and '' != accountName" >
+        account_name = #{accountName,jdbcType=VARCHAR},
+      </if>
+      <if test="taxNo != null and '' != taxNo" >
+        tax_no = #{taxNo,jdbcType=VARCHAR},
+      </if>
+      <if test="bankName != null and '' != bankName" >
+        bank_name = #{bankName,jdbcType=VARCHAR},
+      </if>
+      <if test="bankNo != null and '' != bankNo" >
+        bank_no = #{bankNo,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null and '' != contact" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null and '' != phone" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fullAddress != null" >
+        full_address = #{fullAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.api.common.entity.crm.SupplierBank" >
+    update saas_crm_supplier_bank
+    set account_name = #{accountName,jdbcType=VARCHAR},
+      tax_no = #{taxNo,jdbcType=VARCHAR},
+      bank_name = #{bankName,jdbcType=VARCHAR},
+      bank_no = #{bankNo,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      full_address = #{fullAddress,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where supplier_id = #{supplierId,jdbcType=INTEGER}
+  </update>
+  <select id="listData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_supplier_bank
+    <where> 1=1 
+      <if test="supplierId != null">
+        and supplier_id = #{supplierId,jdbcType=INTEGER}
+      </if>
+      <if test="accountName != null and '' != accountName" >
+        and account_name = #{accountName,jdbcType=VARCHAR} 
+      </if>
+      <if test="taxNo != null and '' != taxNo" >
+        and tax_no = #{taxNo,jdbcType=VARCHAR} 
+      </if>
+      <if test="bankNo != null and '' != bankNo" >
+        and bank_no = #{bankNo,jdbcType=VARCHAR} 
+      </if>
+      <if test="phone != null and '' != phone" >
+        and phone = #{phone,jdbcType=VARCHAR} 
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_crm_supplier_bank
+    <where> 1=1 
+     <if test="supplierId != null">
+        and supplier_id = #{supplierId,jdbcType=INTEGER}
+      </if>
+      <if test="accountName != null and '' != accountName" >
+        and account_name = #{accountName,jdbcType=VARCHAR} 
+      </if>
+      <if test="taxNo != null and '' != taxNo" >
+        and tax_no = #{taxNo,jdbcType=VARCHAR} 
+      </if>
+      <if test="bankNo != null and '' != bankNo" >
+        and bank_no = #{bankNo,jdbcType=VARCHAR} 
+      </if>
+      <if test="phone != null and '' != phone" >
+        and phone = #{phone,jdbcType=VARCHAR} 
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <select id="findByObject" parameterType="com.saas.api.common.entity.crm.SupplierBank" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_supplier_bank
+    <where> 1=1 
+      <if test="supplierId != null">
+        and supplier_id = #{supplierId,jdbcType=INTEGER}
+      </if>
+      <if test="accountName != null and '' != accountName" >
+        and account_name = #{accountName,jdbcType=VARCHAR} 
+      </if>
+      <if test="taxNo != null and '' != taxNo" >
+        and tax_no = #{taxNo,jdbcType=VARCHAR} 
+      </if>
+      <if test="bankNo != null and '' != bankNo" >
+        and bank_no = #{bankNo,jdbcType=VARCHAR} 
+      </if>
+      <if test="contact != null and '' != contact" >
+        and contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null and '' != phone" >
+        and phone = #{phone,jdbcType=VARCHAR} 
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+</mapper>

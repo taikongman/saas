@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.sys.auth.RoleMenuDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.sys.auth.RoleMenu" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="menu_id" property="menuId" jdbcType="INTEGER" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, menu_id, type
+  </sql>
+  <select id="listByRoleIdIn" resultType="com.saas.api.common.entity.sys.auth.RoleMenu">
+        SELECT menu_id
+        FROM saas_sys_auth_role_menu
+        where role_id IN
+        <foreach collection="list" item="id" index="index" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
+    <select id="listByRoleId" resultType="com.saas.api.common.entity.sys.auth.RoleMenu">
+        SELECT menu_id
+        FROM saas_sys_auth_role_menu
+        where role_id = #{roleId}
+    </select>
+    <select id="findByMenuId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        SELECT role_id, menu_id
+        FROM saas_sys_auth_role_menu
+        where menu_id = #{menuId,jdbcType=INTEGER} 
+    </select>
+    <insert id="insertMenuAll">
+        INSERT INTO saas_sys_auth_role_menu
+        (role_id, menu_id, `type`)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            <if test="item.roleId != null and item.menuId != null and item.type != null">
+                (#{item.roleId}, #{item.menuId}, #{item.type})
+            </if>
+        </foreach>
+    </insert>
+    <delete id="deleteByMenuId" parameterType="java.lang.Integer">
+        delete from saas_sys_auth_role_menu where menu_id = #{menuId,jdbcType=INTEGER} 
+    </delete>
+    <delete id="deleteByRoleId" parameterType="java.lang.Integer">
+        delete from saas_sys_auth_role_menu where role_id = #{roleId,jdbcType=INTEGER} 
+    </delete>
+
+</mapper>

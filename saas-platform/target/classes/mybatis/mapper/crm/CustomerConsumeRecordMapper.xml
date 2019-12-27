@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.crm.CustomerConsumeRecordDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.crm.CustomerConsumeRecord" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="consume_type" property="consumeType" jdbcType="INTEGER" />
+    <result column="account_id" property="accountId" jdbcType="BIGINT" />
+    <result column="card_id" property="cardId" jdbcType="BIGINT" />
+    <result column="card_content_id" property="cardContentId" jdbcType="BIGINT" />
+    <result column="pay_id" property="payId" jdbcType="BIGINT" />
+    <result column="order_id" property="orderId" jdbcType="BIGINT" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="integral" property="integral" jdbcType="DECIMAL" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customer_id, consume_type, account_id, card_id, card_content_id, pay_id, order_id, 
+    amount, integral, remark, status, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_customer_consume_record
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from saas_crm_customer_consume_record
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.CustomerConsumeRecord" >
+    insert into saas_crm_customer_consume_record (customer_id, consume_type, account_id, card_id, 
+    card_content_id, pay_id, order_id,  
+    amount, integral, remark, status, create_time
+      )
+    values (#{customerId,jdbcType=BIGINT}, #{consumeType,jdbcType=INTEGER}, #{accountId,jdbcType=BIGINT}, #{cardId,jdbcType=BIGINT}, 
+      #{cardContentId,jdbcType=BIGINT}, #{payId,jdbcType=BIGINT}, #{orderId,jdbcType=BIGINT}, 
+      #{amount,jdbcType=DECIMAL}, #{integral,jdbcType=DECIMAL}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.crm.CustomerConsumeRecord" >
+    insert into saas_crm_customer_consume_record
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="consumeType != null" >
+        consume_type,
+      </if>
+      <if test="accountId != null" >
+        account_id,
+      </if>
+      <if test="cardId != null" >
+        card_id,
+      </if>
+      <if test="cardContentId != null" >
+        card_content_id,
+      </if>
+      <if test="payId != null" >
+        pay_id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="integral != null" >
+        integral,
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="consumeType != null" >
+        #{consumeType,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null" >
+        #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="cardId != null" >
+        #{cardId,jdbcType=BIGINT},
+      </if>
+      <if test="cardContentId != null" >
+        #{cardContentId,jdbcType=BIGINT},
+      </if>
+      <if test="payId != null" >
+        #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="integral != null" >
+        #{integral,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null and '' != remark" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.api.common.entity.crm.CustomerConsumeRecord" >
+    update saas_crm_customer_consume_record
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="consumeType != null" >
+        consume_type = #{consumeType,jdbcType=INTEGER},
+      </if>
+      <if test="accountId != null" >
+        account_id = #{accountId,jdbcType=BIGINT},
+      </if>
+      <if test="cardId != null" >
+        card_id = #{cardId,jdbcType=BIGINT},
+      </if>
+      <if test="cardContentId != null" >
+        card_content_id = #{cardContentId,jdbcType=BIGINT},
+      </if>
+      <if test="payId != null" >
+        pay_id = #{payId,jdbcType=BIGINT},
+      </if>
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="integral != null" >
+        integral = #{integral,jdbcType=DECIMAL},
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.api.common.entity.crm.CustomerConsumeRecord" >
+    update saas_crm_customer_consume_record
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      consume_type = #{consumeType,jdbcType=INTEGER},
+      account_id = #{accountId,jdbcType=BIGINT},
+      card_id = #{cardId,jdbcType=BIGINT},
+      card_content_id = #{cardContentId,jdbcType=BIGINT},
+      pay_id = #{payId,jdbcType=BIGINT},
+      order_id = #{orderId,jdbcType=BIGINT},
+      amount = #{amount,jdbcType=DECIMAL},
+      integral = #{integral,jdbcType=DECIMAL},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByCustomerId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_customer_consume_record
+    <where>
+      customer_id = #{customerId,jdbcType=BIGINT}
+      <if test="accountType != null">
+        and consume_type = #{consumeType,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <select id="selectByCustomerIdAndCardId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_customer_consume_record
+    <where>
+      customer_id = #{customerId,jdbcType=BIGINT}
+      and card_id = #{cardId,jdbcType=BIGINT}
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <select id="selectByOrderIId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_customer_consume_record
+    <where>
+      order_id = #{orderId,jdbcType=BIGINT}
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+  <select id="findByObject" parameterType="com.saas.api.common.entity.crm.CustomerConsumeRecord" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_customer_account_commodity
+    <where> 1=1 
+      <if test="customerId != null">
+        and customer_id = #{customerId,jdbcType=BIGINT} 
+      </if>
+      <if test="accountId != null">
+        and account_id = #{accountId,jdbcType=BIGINT} 
+      </if>
+      <if test="cardId != null">
+        and card_id = #{cardId,jdbcType=BIGINT} 
+      </if>
+      <if test="consumeType != null">
+        and consume_type = #{consumeType,jdbcType=INTEGER} 
+      </if>
+      <if test="cardContentId != null">
+        and card_content_id = #{cardContentId,jdbcType=BIGINT} 
+      </if>
+      <if test="payId != null" >
+        and pay_id = #{payId,jdbcType=BIGINT} 
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+    </where>
+  </select>
+</mapper>

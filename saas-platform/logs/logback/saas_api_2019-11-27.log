@@ -1,0 +1,31 @@
+2019-11-27 16:13:08 restartedMain INFO Starting ApiAdminApplication on LAPTOP-RF3ITLM1 with PID 185200 (D:\WorkDir\workspace\projects\java\saas\saas-platform\target\classes started by 15332 in D:\WorkDir\workspace\projects\java\saas\saas-platform)
+2019-11-27 16:13:08 restartedMain DEBUG Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-11-27 16:13:08 restartedMain INFO The following profiles are active: pro
+2019-11-27 16:17:43 restartedMain INFO Starting ApiAdminApplication on LAPTOP-RF3ITLM1 with PID 183824 (D:\WorkDir\workspace\projects\java\saas\saas-platform\target\classes started by 15332 in D:\WorkDir\workspace\projects\java\saas\saas-platform)
+2019-11-27 16:17:43 restartedMain DEBUG Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-11-27 16:17:43 restartedMain INFO The following profiles are active: pro
+2019-11-27 16:19:53 restartedMain INFO Starting ApiAdminApplication on LAPTOP-RF3ITLM1 with PID 182060 (D:\WorkDir\workspace\projects\java\saas\saas-platform\target\classes started by 15332 in D:\WorkDir\workspace\projects\java\saas\saas-platform)
+2019-11-27 16:19:53 restartedMain DEBUG Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-11-27 16:19:53 restartedMain INFO The following profiles are active: pro
+2019-11-27 16:26:23 restartedMain INFO Starting ApiAdminApplication on LAPTOP-RF3ITLM1 with PID 169672 (D:\WorkDir\workspace\projects\java\saas\saas-platform\target\classes started by 15332 in D:\WorkDir\workspace\projects\java\saas\saas-platform)
+2019-11-27 16:26:23 restartedMain DEBUG Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-11-27 16:26:23 restartedMain INFO The following profiles are active: pro
+2019-11-27 16:28:29 restartedMain INFO Starting ApiAdminApplication on LAPTOP-RF3ITLM1 with PID 134400 (D:\WorkDir\workspace\projects\java\saas\saas-platform\target\classes started by 15332 in D:\WorkDir\workspace\projects\java\saas\saas-platform)
+2019-11-27 16:28:29 restartedMain DEBUG Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-11-27 16:28:29 restartedMain INFO The following profiles are active: pro
+2019-11-27 16:28:38 restartedMain INFO Started ApiAdminApplication in 9.839 seconds (JVM running for 10.921)
+2019-11-27 16:29:55 restartedMain INFO Starting ApiAdminApplication on LAPTOP-RF3ITLM1 with PID 134400 (D:\WorkDir\workspace\projects\java\saas\saas-platform\target\classes started by 15332 in D:\WorkDir\workspace\projects\java\saas\saas-platform)
+2019-11-27 16:29:55 restartedMain DEBUG Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-11-27 16:29:55 restartedMain INFO The following profiles are active: pro
+2019-11-27 16:29:58 restartedMain INFO Started ApiAdminApplication in 3.598 seconds (JVM running for 91.041)
+2019-11-27 16:30:07 restartedMain INFO Starting ApiAdminApplication on LAPTOP-RF3ITLM1 with PID 134400 (D:\WorkDir\workspace\projects\java\saas\saas-platform\target\classes started by 15332 in D:\WorkDir\workspace\projects\java\saas\saas-platform)
+2019-11-27 16:30:07 restartedMain DEBUG Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-11-27 16:30:07 restartedMain INFO The following profiles are active: pro
+2019-11-27 16:30:10 restartedMain INFO Started ApiAdminApplication in 3.217 seconds (JVM running for 102.601)
+2019-11-27 16:31:08 restartedMain INFO Starting ApiAdminApplication on LAPTOP-RF3ITLM1 with PID 181704 (D:\WorkDir\workspace\projects\java\saas\saas-platform\target\classes started by 15332 in D:\WorkDir\workspace\projects\java\saas\saas-platform)
+2019-11-27 16:31:08 restartedMain DEBUG Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-11-27 16:31:08 restartedMain INFO The following profiles are active: pro
+2019-11-27 16:31:26 restartedMain INFO Starting ApiAdminApplication on LAPTOP-RF3ITLM1 with PID 154080 (D:\WorkDir\workspace\projects\java\saas\saas-platform\target\classes started by 15332 in D:\WorkDir\workspace\projects\java\saas\saas-platform)
+2019-11-27 16:31:26 restartedMain DEBUG Running with Spring Boot v2.1.3.RELEASE, Spring v5.1.5.RELEASE
+2019-11-27 16:31:26 restartedMain INFO The following profiles are active: pro
+2019-11-27 16:31:36 restartedMain INFO Started ApiAdminApplication in 11.135 seconds (JVM running for 12.192)

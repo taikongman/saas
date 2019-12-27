@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.sys.ConfigDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.sys.Config" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="key_name" property="keyName" jdbcType="VARCHAR" />
+    <result column="key_value" property="keyValue" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="lan_type" property="lanType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, key_name, key_value, description, create_time, update_time
+  </sql>
+  <select id="findByKeyName" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from saas_sys_config
+    <where> 1 = 1
+      <if test="keyName != null" >
+        and key_name = #{keyName,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="listData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from saas_sys_config
+    <where> 1 = 1
+      <if test="keyName != null" >
+        and key_name = #{keyName,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="countData" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_sys_config
+    <where> 1 = 1
+      <if test="keyName != null" >
+        and key_name = #{keyName,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_sys_config
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <insert id="insertData" useGeneratedKeys="true" keyProperty="id" parameterType="com.saas.api.common.entity.sys.Config" >
+    insert into saas_sys_config (key_name, key_value, description, create_time, lan_type)
+    values (#{keyName,jdbcType=VARCHAR}, #{keyValue,jdbcType=VARCHAR},
+    #{description,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+    #{lanType,jdbcType=VARCHAR}
+    )
+  </insert>
+  <update id="updateData" parameterType="com.saas.api.common.entity.sys.Config" >
+    update saas_sys_config
+    <set >
+      <if test="keyName != null" >
+        key_value = #{keyValue,jdbcType=VARCHAR}, 
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from saas_sys_config
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+</mapper>

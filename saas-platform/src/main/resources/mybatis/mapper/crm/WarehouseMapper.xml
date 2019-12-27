@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.crm.WarehouseDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.crm.Warehouse" >
+    <id column="warehouse_id" property="warehouseId" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="admin_id" property="adminId" jdbcType="BIGINT" />
+    <result column="warehouse_code" property="warehouseCode" jdbcType="VARCHAR" />
+    <result column="warehouse_name" property="warehouseName" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="full_address" property="fullAddress" jdbcType="VARCHAR" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="lan_type" property="lanType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    warehouse_id, group_id, company_id, department_id, admin_id, warehouse_code, warehouse_name, contact, phone,  
+    province_id, province, city_id, city, area_id, area, province_id, address, full_address, 
+    remark, status, create_time, update_time 
+  </sql>
+  <resultMap id="SelectResultMap" type="com.saas.api.admin.res.select.crm.WarehouseSelect" >
+    <id column="warehouse_id" property="warehouseId" jdbcType="INTEGER" />
+    <result column="warehouse_name" property="warehouseName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Select_Column_List" >
+    warehouse_id, warehouse_name
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from saas_crm_warehouse
+    where warehouse_id = #{warehouseId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from saas_crm_warehouse
+    where warehouse_id = #{warehouseId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" useGeneratedKeys="true" keyProperty="warehouseId" parameterType="com.saas.api.common.entity.crm.Warehouse" >
+    insert into saas_crm_warehouse (group_id, company_id, department_id, admin_id, 
+    warehouse_code, warehouse_name, contact, phone,  
+    province_id, province, city_id, city, area_id, area, address, full_address, 
+    remark, status, create_time, lan_type)
+    values (#{groupId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, #{departmentId,jdbcType=INTEGER}, #{adminId,jdbcType=BIGINT}, 
+      #{warehouseCode,jdbcType=VARCHAR}, #{warehouseName,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
+      #{provinceId,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{cityId,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+      #{areaId,jdbcType=VARCHAR}, #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{fullAddress,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{lanType,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="warehouseId" parameterType="com.saas.api.common.entity.crm.Warehouse" >
+    insert into saas_crm_warehouse
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="departmentId != null" >
+        department_id,
+      </if>
+      <if test="adminId != null" >
+        admin_id,
+      </if>
+      <if test="warehouseCode != null and '' != warehouseName" >
+        warehouse_code,
+      </if>
+      <if test="warehouseName != null and '' != warehouseName" >
+        warehouse_name,
+      </if>
+      <if test="contact != null and '' != contact" >
+        contact,
+      </if>
+      <if test="phone != null and '' != phone" >
+        phone,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="fullAddress != null" >
+        full_address,
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        lan_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="departmentId != null" >
+        #{departmentId,jdbcType=INTEGER},
+      </if>
+      <if test="adminId != null" >
+        #{adminId,jdbcType=BIGINT},
+      </if>
+      <if test="warehouseCode != null and '' != warehouseCode" >
+        #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null and '' != warehouseName" >
+        #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null and '' != contact" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null and '' != phone" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fullAddress != null" >
+        #{fullAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        #{lanType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.api.common.entity.crm.Warehouse" >
+    update saas_crm_warehouse
+    <set >
+      <if test="warehouseCode != null and '' != warehouseCode" >
+        warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseName != null and '' != warehouseName" >
+        warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null and '' != contact" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null and '' != phone" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="fullAddress != null" >
+        full_address = #{fullAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null and '' != remark" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where warehouse_id = #{warehouseId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.api.common.entity.crm.Warehouse" >
+    update saas_crm_warehouse
+    set warehouse_code = #{warehouseCode,jdbcType=VARCHAR},
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR},
+      contact = #{contact,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      province_id = #{provinceId,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      area_id = #{areaId,jdbcType=VARCHAR},
+      area = #{area,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      full_address = #{fullAddress,jdbcType=VARCHAR},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where warehouse_id = #{warehouseId,jdbcType=INTEGER}
+  </update>
+  <select id="listData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_warehouse
+    <where> 1=1 
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="warehouseCode != null and warehouseCode !=''">
+        and warehouse_code #{warehouseCode,jdbcType=VARCHAR}
+      </if>
+      <if test="warehouseName != null and warehouseName !=''">
+        and warehouse_name LIKE "%"#{warehouseName}"%"
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_crm_warehouse
+    <where> 1=1 
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="warehouseCode != null and warehouseCode !=''">
+        and warehouse_code #{warehouseCode,jdbcType=VARCHAR}
+      </if>
+      <if test="warehouseName != null and warehouseName !=''">
+        and warehouse_name LIKE "%"#{warehouseName}"%"
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="countByWarehouseName" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_crm_warehouse
+    <where>
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR}
+      and status = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="selectByWarehouseName" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_warehouse
+    <where>
+      warehouse_name = #{warehouseName,jdbcType=VARCHAR}
+      and status = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findByObject" resultMap="BaseResultMap" parameterType="com.saas.api.common.entity.crm.Warehouse" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_warehouse
+    <where> 1 = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="warehouseCode != null and warehouseCode !=''">
+        and warehouse_code #{warehouseCode,jdbcType=VARCHAR}
+      </if>
+      <if test="warehouseName != null and warehouseName !=''">
+        and warehouse_name LIKE "%"#{warehouseName}"%"
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findSelectObject" resultMap="SelectResultMap" parameterType="com.saas.api.common.entity.crm.Warehouse" >
+    select 
+    <include refid="Select_Column_List" />
+    from saas_crm_warehouse
+    <where> 1 = 1
+      <if test="groupId != null">
+        and group_id = #{groupId,jdbcType=INTEGER}
+      </if>
+      <if test="companyId != null">
+        and company_id = #{companyId,jdbcType=INTEGER}
+      </if>
+      <if test="departmentId != null">
+        and department_id = #{departmentId,jdbcType=INTEGER}
+      </if>
+      <if test="adminId != null">
+        and admin_id = #{adminId,jdbcType=BIGINT}
+      </if>
+      <if test="status != null">
+        and status = #{status,jdbcType=INTEGER}
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+</mapper>

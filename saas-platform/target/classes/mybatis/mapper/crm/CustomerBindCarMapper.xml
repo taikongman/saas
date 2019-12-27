@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.crm.CustomerBindCarDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.crm.CustomerBindCar" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="customer_id" property="customerId" jdbcType="BIGINT" />
+    <result column="car_id" property="carId" jdbcType="BIGINT" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="modify_at" property="modifyAt" jdbcType="TIMESTAMP" />
+    <result column="version" property="version" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, customer_id, car_id, create_at, modify_at, version
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_crm_customer_bind_car
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from saas_crm_customer_bind_car
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByCustomerId" parameterType="java.lang.Long" >
+    delete from saas_crm_customer_bind_car
+    where customer_id = #{customerId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.saas.api.common.entity.crm.CustomerBindCar" useGeneratedKeys="true" keyProperty="id" >
+    insert into saas_crm_customer_bind_car (customer_id, car_id, 
+      create_at, modify_at, version
+      )
+    values (#{customerId,jdbcType=BIGINT}, #{carId,jdbcType=BIGINT}, 
+      #{createAt,jdbcType=TIMESTAMP}, #{modifyAt,jdbcType=TIMESTAMP}, #{version,jdbcType=INTEGER}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.saas.api.common.entity.crm.CustomerBindCar" useGeneratedKeys="true" keyProperty="id" >
+    insert into saas_crm_customer_bind_car
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        customer_id,
+      </if>
+      <if test="carId != null" >
+        car_id,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="modifyAt != null" >
+        modify_at,
+      </if>
+      <if test="version != null" >
+        version,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="customerId != null" >
+        #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null" >
+        #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyAt != null" >
+        #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.saas.api.common.entity.crm.CustomerBindCar" >
+    update saas_crm_customer_bind_car
+    <set >
+      <if test="customerId != null" >
+        customer_id = #{customerId,jdbcType=BIGINT},
+      </if>
+      <if test="carId != null" >
+        car_id = #{carId,jdbcType=BIGINT},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyAt != null" >
+        modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="version != null" >
+        version = #{version,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.saas.api.common.entity.crm.CustomerBindCar" >
+    update saas_crm_customer_bind_car
+    set customer_id = #{customerId,jdbcType=BIGINT},
+      car_id = #{carId,jdbcType=BIGINT},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      modify_at = #{modifyAt,jdbcType=TIMESTAMP},
+      version = #{version,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByCustomerIdAndCarId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_customer_bind_car
+    <where>
+      customer_id = #{customerId,jdbcType=BIGINT}
+      and car_id = #{carId,jdbcType=BIGINT}
+    </where>
+  </select>
+
+  <select id="selectByCustomerId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_customer_bind_car
+    <where>
+      customer_id = #{customerId,jdbcType=BIGINT}
+    </where>
+  </select>
+
+  <select id="selectByCarId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from saas_crm_customer_bind_car
+    <where>
+      car_id = #{carId,jdbcType=BIGINT}
+    </where>
+  </select>
+</mapper>

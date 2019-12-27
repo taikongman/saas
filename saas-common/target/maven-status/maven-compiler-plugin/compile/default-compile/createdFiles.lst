@@ -1,0 +1,9 @@
+com\saas\api\common\enums\ResultEnum.class
+com\saas\api\common\converter\String2StringListConverter.class
+com\saas\api\common\converter\String2LongListConverter.class
+com\saas\api\common\res\BaseResponse.class
+com\saas\api\common\converter\LongList2StringConverter.class
+com\saas\api\common\constant\CacheConstant.class
+com\saas\api\common\req\BaseLimitRequest.class
+com\saas\api\common\req\BaseRequest.class
+com\saas\api\common\util\ResultVOUtils.class

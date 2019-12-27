@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.sys.auth.RoleDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.sys.auth.Role" >
+    <id column="role_id" property="roleId" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="roleName" property="role_name" jdbcType="VARCHAR" />
+    <result column="pid" property="pid" jdbcType="INTEGER" />
+    <result column="remark" property="remark" jdbcType="VARCHAR" />
+    <result column="listorder" property="listorder" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="lan_type" property="lanType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    role_id, group_id, company_id, role_name, pid, remark, listorder, status, create_time, update_time
+  </sql>
+  <select id="listData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from saas_sys_auth_role
+    <where> 1 = 1
+      <if test="groupId != null" >
+        and group_id = #{groupId,jdbcType=INTEGER} 
+      </if>
+      <if test="companyId != null" >
+        and company_id = #{companyId,jdbcType=INTEGER} 
+      </if>
+      <if test="roleId != null" >
+        and role_id = #{roleId,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+    ORDER BY create_time desc
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_sys_auth_role
+    <where> 1 = 1
+      <if test="groupId != null" >
+        and group_id = #{groupId,jdbcType=INTEGER} 
+      </if>
+      <if test="companyId != null" >
+        and company_id = #{companyId,jdbcType=INTEGER} 
+      </if>
+      <if test="roleId != null" >
+        and role_id = #{roleId,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findByObject" resultMap="BaseResultMap" parameterType="com.saas.api.common.entity.sys.auth.Role" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_sys_auth_role
+    <where> 1 = 1
+      <if test="groupId != null" >
+        and group_id = #{groupId,jdbcType=INTEGER} 
+      </if>
+      <if test="companyId != null" >
+        and company_id = #{companyId,jdbcType=INTEGER} 
+      </if>
+      <if test="roleId != null" >
+        and role_id = #{roleId,jdbcType=INTEGER} 
+      </if>
+      <if test="roleName != null" >
+        and role_name = #{roleName,jdbcType=VARCHAR} 
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_sys_auth_role
+    where role_id = #{roleId,jdbcType=INTEGER} 
+  </select>
+  <select id="findByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_sys_auth_role
+    where role_name = #{roleName,jdbcType=VARCHAR} 
+  </select>
+  <insert id="insertData" useGeneratedKeys="true" keyProperty="roleId" parameterType="com.saas.api.common.entity.sys.auth.Role" >
+    insert into saas_sys_auth_role (group_id, company_id, role_name, pid, remark, listorder, status, create_time, lan_type)
+    values (#{groupId,jdbcType=INTEGER}, #{companyId,jdbcType=INTEGER}, 
+    #{roleName,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR},
+    #{listorder,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+    #{lanType,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="roleId" parameterType="com.saas.api.common.entity.sys.auth.Role" >
+    insert into saas_sys_auth_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+       <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="pid != null" >
+        pid,
+      </if>
+      <if test="remark != null" >
+        remark,
+      </if>
+      <if test="listorder != null" >
+        listorder,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lanType != null" >
+        lan_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=INTEGER},
+      </if>
+      <if test="roleName != null" >
+       #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="listorder != null" >
+        #{listorder,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lanType != null" >
+        #{lanType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateData" parameterType="com.saas.api.common.entity.sys.auth.Role" >
+    update saas_sys_auth_role
+    <set >
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        pid = #{pid,jdbcType=INTEGER},
+      </if>
+      <if test="listorder != null" >
+        listorder = #{listorder,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where role_id = #{roleId,jdbcType=INTEGER} 
+  </update>
+  <delete id="deleteById" parameterType="java.lang.Long" >
+    delete from saas_sys_auth_role
+    where role_id = #{roleId,jdbcType=INTEGER} 
+  </delete>
+</mapper>

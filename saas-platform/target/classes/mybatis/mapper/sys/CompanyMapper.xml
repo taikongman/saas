@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.saas.api.common.dao.sys.CompanyDao" >
+  <resultMap id="BaseResultMap" type="com.saas.api.common.entity.sys.Company" >
+    <id column="company_id" property="companyId" jdbcType="INTEGER" />
+    <result column="group_id" property="groupId" jdbcType="INTEGER" />
+    <result column="group_name" property="groupName" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="contact" property="contact" jdbcType="VARCHAR" />
+    <result column="phoneno" property="phoneno" jdbcType="VARCHAR" />
+    <result column="description" property="description" jdbcType="VARCHAR" />
+    <result column="province_id" property="provinceId" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="VARCHAR" />
+    <result column="area_id" property="areaId" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="area" property="area" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="detail_address" property="detailAddress" jdbcType="VARCHAR" />
+    <result column="logo" property="logo" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="lan_type" property="lanType" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    company_id, group_id, group_name, company_name, contact, phoneno, description, province_id, city_id, area_id, province, city, area, 
+    address, detail_address, logo, status, create_time, update_time
+  </sql>
+  <select id="listData" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from saas_sys_company
+    <where> 1 = 1
+      <if test="groupId != null" >
+        and group_id = #{groupId,jdbcType=INTEGER} 
+      </if>
+      <if test="companyId != null" >
+        and company_id = #{companyId,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+    ORDER BY create_time desc
+    <if test="pageSize > 0">
+      limit #{startIndex},#{pageSize};
+    </if>
+  </select>
+  <select id="countData" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+    select
+    count(1)
+    from saas_sys_company
+    <where> 1 = 1
+      <if test="groupId != null" >
+        and group_id = #{groupId,jdbcType=INTEGER} 
+      </if>
+      <if test="companyId != null" >
+        and company_id = #{companyId,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  <select id="findByObject" resultMap="BaseResultMap" parameterType="com.saas.api.common.entity.sys.Company" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_sys_company
+    <where> 1 = 1
+      <if test="groupId != null" >
+        and group_id = #{groupId,jdbcType=INTEGER} 
+      </if>
+      <if test="companyId != null" >
+        and company_id = #{companyId,jdbcType=INTEGER} 
+      </if>
+      <if test="companyName != null and '' != companyName" >
+        and company_name = #{companyName,jdbcType=VARCHAR} 
+      </if>
+      <if test="phoneno != null and '' != phoneno" >
+        and phoneno = #{phoneno,jdbcType=VARCHAR} 
+      </if>
+      <if test="provinceId != null and '' != provinceId" >
+        and province_id = #{provinceId,jdbcType=VARCHAR} 
+      </if>
+      <if test="province != null and '' != province" >
+        and province = #{province,jdbcType=VARCHAR} 
+      </if>
+      <if test="cityId != null and '' != cityId" >
+        and city_id = #{cityId,jdbcType=VARCHAR} 
+      </if>
+      <if test="city != null and '' != city" >
+        and city = #{city,jdbcType=VARCHAR} 
+      </if>
+      <if test="areaId != null and '' != areaId" >
+        and area_id = #{areaId,jdbcType=VARCHAR} 
+      </if>
+      <if test="area != null and '' != area" >
+        and area = #{area,jdbcType=VARCHAR} 
+      </if>
+      <if test="status != null" >
+        and status = #{status,jdbcType=INTEGER} 
+      </if>
+      <if test="lanType != null and '' != lanType" >
+        and lan_type = #{lanType,jdbcType=VARCHAR} 
+      </if>
+    </where>
+  </select>
+  
+  <select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_sys_company
+    where company_id = #{companyId,jdbcType=INTEGER} 
+  </select>
+  <select id="findByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from saas_sys_company
+    where company_name = #{companyName,jdbcType=VARCHAR} 
+  </select>
+  <insert id="insertData" useGeneratedKeys="true" keyProperty="companyId" parameterType="com.saas.api.common.entity.sys.Company" >
+    insert into saas_sys_company (group_id, group_name, company_name, contact, phoneno, description, 
+    province_id, city_id, area_id, province, city, area, 
+    address, detail_address, logo, status, create_time, lan_type)
+    values (#{groupId,jdbcType=INTEGER}, #{groupName,jdbcType=VARCHAR}, 
+    #{companyName,jdbcType=VARCHAR}, #{contact,jdbcType=VARCHAR}, #{phoneno,jdbcType=VARCHAR},
+    #{description,jdbcType=VARCHAR}, #{provinceId,jdbcType=VARCHAR}, #{cityId,jdbcType=VARCHAR}, 
+    #{areaId,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, 
+    #{area,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, #{detailAddress,jdbcType=VARCHAR}, 
+    #{logo,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP},
+    #{lanType,jdbcType=VARCHAR}
+    )
+  </insert>
+  <insert id="insertSelective" useGeneratedKeys="true" keyProperty="companyId" parameterType="com.saas.api.common.entity.sys.Company" >
+    insert into saas_sys_group
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+       <if test="groupId != null" >
+        group_id,
+      </if>
+      <if test="groupName != null" >
+        group_name,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="contact != null" >
+        contact,
+      </if>
+      <if test="phoneno != null" >
+        phoneno,
+      </if>
+      <if test="description != null" >
+        description,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="areaId != null" >
+        area_id,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="area != null" >
+        area,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="detailAddress != null" >
+        detail_address,
+      </if>
+      <if test="logo != null" >
+        logo,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="lanType != null" >
+        lan_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="groupId != null" >
+        #{groupId,jdbcType=INTEGER},
+      </if>
+      <if test="groupName != null" >
+        #{groupName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+       #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneno != null" >
+        #{phoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null" >
+        #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lanType != null" >
+        #{lanType,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateData" parameterType="com.saas.api.common.entity.sys.Company" >
+    update saas_sys_company
+    <set >
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneno != null" >
+        phoneno = #{phoneno,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null" >
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="areaId != null" >
+        area_id = #{areaId,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null" >
+        area = #{area,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="detailAddress != null" >
+        detail_address = #{detailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="logo != null" >
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where company_id = #{companyId,jdbcType=INTEGER} 
+  </update>
+  <delete id="deleteById" parameterType="java.lang.Integer" >
+    delete from saas_sys_company
+    where company_id = #{companyId,jdbcType=INTEGER} 
+  </delete>
+</mapper>
